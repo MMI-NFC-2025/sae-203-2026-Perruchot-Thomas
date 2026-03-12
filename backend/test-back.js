@@ -1,105 +1,86 @@
 import { 
-    getArtistesByDate, getAllScenes, getAllArtistes,
-    getArtisteById, getSceneById, getArtistesBySceneId,
-    getArtistesBySceneNom, saveArtiste, saveScene
+    getAllArtistes, getArtisteById, saveArtiste,
+    getAllScenes, getSceneById, saveScene,
+    getArtistesByDate, getProgrammationByScene,
+    getAllArtistesSortedByDate, getArtistesBySceneId,
+    getArtistesBySceneNom, ajouterArtiste, sendContact
 } from './backend.mjs';
 
-
-async function t1_artistesParDate() {
-    const data = await getArtistesByDate(""); 
-    console.log("TEST 1 : Artistes par date de représentation");
-    data.forEach(a => console.log(`- ${a.nom}`));
+async function test1_getAllArtistes() {
+    console.log((await getAllArtistes()).length);
 }
 
-async function t2_toutesLesScenes() {
-    const data = await getAllScenes();
-    console.log("TEST 2 : Scènes triées par nom");
-    console.table(data.map(s => ({ nom: s.nom })));
+async function test2_getArtisteById() {
+    const a = await getAllArtistes();
+    if (a.length) console.log((await getArtisteById(a[0].id))?.nom);
+    else console.log('e');
 }
 
-async function t3_artistesAlphabetique() {
-    const data = await getAllArtistes();
-    console.log("TEST 3 : Artistes par ordre alphabétique");
-    console.table(data.map(a => ({ nom: a.nom })));
+async function test3_saveArtiste() {
+    const s = await saveArtiste({ nom: "Artiste de Test", genre: "Test" });
+    console.log(s?.id || 'e');
 }
 
-async function t4_artisteId(id) {
-    const data = await getArtisteById(id);
-    console.log("TEST 4 : Infos complètes Artiste");
-    console.log(JSON.stringify(data, null, 2));
+async function test4_getAllScenes() {
+    console.log((await getAllScenes()).length);
 }
 
-async function t5_sceneId(id) {
-    const data = await getSceneById(id);
-    console.log("TEST 5 : Infos complètes Scène");
-    console.log(JSON.stringify(data, null, 2));
+async function test5_getSceneById() {
+    const s = await getAllScenes();
+    if (s.length) console.log((await getSceneById(s[0].id))?.nom);
+    else console.log('e');
 }
 
-async function t6_artistesParSceneId(id) {
-    const data = await getArtistesBySceneId(id);
-    console.log("TEST 6 : Programmation Scène par ID");
-    
-    data.forEach(p => {
-        const noms = Array.isArray(p.expand.artiste) 
-            ? p.expand.artiste.map(a => a.nom).join(', ') 
-            : p.expand.artiste.nom;
-        console.log(`${p.date} : ${noms}`);
-    });
+async function test6_saveScene() {
+    const s = await saveScene({ nom: "Scène de Test" });
+    console.log(s?.id || 'e');
 }
 
-async function t7_artistesParSceneNom(nom) {
-    const data = await getArtistesBySceneNom(nom);
-    console.log(`TEST 7 : Programmation Scène par Nom (${nom})`);
-    data.forEach(p => {
-        const noms = Array.isArray(p.expand.artiste) 
-            ? p.expand.artiste.map(a => a.nom).join(', ') 
-            : p.expand.artiste.nom;
-        console.log(`${p.date} : ${noms}`);
-    });
+async function test7_getArtistesByDate() {
+    console.log((await getArtistesByDate("2026-10-31")).length);
 }
 
-async function t8_save() {
-    const newArt = await saveArtiste({ nom: "Artiste Test", style_artiste: "Dub" });
-    console.log("TEST 8 : Sauvegarde réussie. ID créé :", newArt.id);
+async function test8_getProgrammationByScene() {
+    const s = await getAllScenes();
+    if (s.length) console.log((await getProgrammationByScene(s[0].id)).length);
+    else console.log('e');
 }
 
-
-console.log(hr);
-await t1_artistesParDate();
-console.log(hr);
-await t2_toutesLesScenes();
-console.log(hr);
-await t3_artistesAlphabetique();
-console.log(hr);
-await t4_artisteId("nnd4p6m68gmqxd0");
-console.log(hr);
-await t5_sceneId("d93yeldcupcmmu9"); 
-console.log(hr);
-await t6_artistesParSceneId("d93yeldcupcmmu9");
-console.log(hr);
-await t7_artistesParSceneNom("SCÈNE UBUNTU");
-console.log(hr);
-await t8_save();
-console.log(hr);
-
-
-
-async function test() {
-    console.log("--- Début du test ---");
-    const dateATester = "2026-10-31";  
-    const artistes = await getArtistesByDate(dateATester);
-    
-    console.log(`Test pour la date : ${dateATester}`);
-    console.log(`Nombre d'artistes trouvés : ${artistes.length}`);
-    
-    if (artistes.length > 0) {
-        artistes.forEach(a => {
-            console.log(`- Artiste trouvé : ${a.nom} (Genre : ${a.genre})`);
-        });
-    } else {
-        console.log("Aucun artiste trouvé. Vérifiez vos API Rules ou le format de la date.");
-    }
-    console.log("--- Fin du test ---");
+async function test9_getAllArtistesSortedByDate() {
+    console.log((await getAllArtistesSortedByDate()).length);
 }
 
-await test();
+async function test10_getArtistesBySceneId() {
+    const s = await getAllScenes();
+    if (s.length) console.log((await getArtistesBySceneId(s[0].id)).length);
+    else console.log('e');
+}
+
+async function test11_getArtistesBySceneNom() {
+    const s = await getAllScenes();
+    if (s.length) console.log((await getArtistesBySceneNom(s[0].nom)).length);
+    else console.log('e');
+}
+
+async function test12_ajouterArtiste() {
+    const a = await ajouterArtiste("Artiste Rapide", "Electro");
+    console.log(a?.id || 'e');
+}
+
+async function test13_sendContact() {
+    console.log(await sendContact({ nom: "Test", email: "test@test.fr", message: "Ceci est un test" }));
+}
+
+// await test1_getAllArtistes();
+// await test2_getArtisteById();
+// await test3_saveArtiste();
+// await test4_getAllScenes();
+// await test5_getSceneById();
+// await test6_saveScene();
+// await test7_getArtistesByDate();
+// await test8_getProgrammationByScene();
+// await test9_getAllArtistesSortedByDate();
+// await test10_getArtistesBySceneId();
+// await test11_getArtistesBySceneNom();
+// await test12_ajouterArtiste();
+// await test13_sendContact();

@@ -1,12 +1,10 @@
 import PocketBase from "pocketbase";
-export const pb = new PocketBase('http://127.0.0.1:8090');
+export const pb = new PocketBase('https://echosonore.perruchot.optimiseus.fr');
 
 
 export async function getAllArtistes() {
     try {
-        return await pb.collection('artiste').getFullList({
-            sort: 'nom',
-        });
+        return await pb.collection('artiste').getFullList({ sort: 'nom' });
     } catch (e) {
         console.error("Erreur getAllArtistes :", e);
         return [];
@@ -37,9 +35,7 @@ export async function saveArtiste(artisteData) {
 
 export async function getAllScenes() {
     try {
-        return await pb.collection('scenes').getFullList({
-            sort: 'nom',
-        });
+        return await pb.collection('scenes').getFullList({ sort: 'nom' });
     } catch (e) {
         console.error("Erreur getAllScenes :", e);
         return [];
@@ -84,19 +80,16 @@ export async function getArtistesByDate(dateSelectionnee) {
 
 export async function getProgrammationByScene(id) {
     try {
-        const records = await pb.collection('programmation').getFullList({
+        return await pb.collection('programmation').getFullList({
             filter: `scene = "${id}"`,
             expand: 'artiste',
             sort: 'date',
         });
-        return records;
     } catch (e) { 
-        console.error('Erreur lors de la récupération de la programmation :', e);
+        console.error('Erreur getProgrammationByScene :', e);
         return [];
     }
 }
-
-
 
 
 export async function getAllArtistesSortedByDate() {
@@ -105,7 +98,8 @@ export async function getAllArtistesSortedByDate() {
             sort: 'date',
             expand: 'artiste',
         });
-        return records;
+        const artistes = records.flatMap(reg => reg.expand?.artiste || []);
+        return Array.from(new Map(artistes.map(a => [a.id, a])).values());
     } catch (e) {
         console.error("Erreur getAllArtistesSortedByDate :", e);
         return [];
@@ -114,9 +108,15 @@ export async function getAllArtistesSortedByDate() {
 
 
 export async function getArtistesBySceneId(id) {
-    return await getProgrammationByScene(id); 
+    try {
+        const records = await getProgrammationByScene(id);
+        const artistes = records.flatMap(reg => reg.expand?.artiste || []);
+        return Array.from(new Map(artistes.map(a => [a.id, a])).values());
+    } catch (e) {
+        console.error("Erreur getArtistesBySceneId :", e);
+        return [];
+    }
 }
-
 
 export async function getArtistesBySceneNom(nomScene) {
     try {
@@ -129,20 +129,18 @@ export async function getArtistesBySceneNom(nomScene) {
 }
 
 
-async function ajouterArtiste(nom, genre) {
-    const data = {
-        "nom": nom,
-        "genre": genre,
-    };
+export async function ajouterArtiste(nom, genre) {
+    const data = { nom, genre };
 
     try {
         const record = await pb.collection('artiste').create(data);
         console.log("Artiste créé avec l'ID :", record.id);
+        return record;
     } catch (error) {
-        console.error("Erreur d'ajout :", error.message);
+        console.error("Erreur d'ajout :", error);
+        return null;
     }
 }
-
 
 export async function sendContact(data) {
     try {

@@ -5,7 +5,7 @@ const finalCollectionId = record?.collectionId || collectionId;
 const finalId = record?.id || id;
 
 const url = fileName && finalCollectionId && finalId
-  ? `http://127.0.0.1:8090/api/files/${finalCollectionId}/${finalId}/${fileName}`
+  ? `https://echosonore.perruchot.optimiseus.fr/api/files/${finalCollectionId}/${finalId}/${fileName}`
   : '/placeholder.jpg';
 ---
 <img src={url} alt={alt} class={className} loading="lazy" />
