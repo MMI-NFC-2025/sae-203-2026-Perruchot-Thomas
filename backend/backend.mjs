@@ -91,31 +91,25 @@ export async function getProgrammationByScene(id) {
     }
 }
 
+// --- LES FONCTIONS RESTAURÉES ---
 
 export async function getAllArtistesSortedByDate() {
     try {
+        // On renvoie bien la programmation complète pour que ton Astro puisse lire .expand.artiste
         const records = await pb.collection('programmation').getFullList({
             sort: 'date',
             expand: 'artiste',
         });
-        const artistes = records.flatMap(reg => reg.expand?.artiste || []);
-        return Array.from(new Map(artistes.map(a => [a.id, a])).values());
+        return records; 
     } catch (e) {
         console.error("Erreur getAllArtistesSortedByDate :", e);
         return [];
     }
 }
 
-
 export async function getArtistesBySceneId(id) {
-    try {
-        const records = await getProgrammationByScene(id);
-        const artistes = records.flatMap(reg => reg.expand?.artiste || []);
-        return Array.from(new Map(artistes.map(a => [a.id, a])).values());
-    } catch (e) {
-        console.error("Erreur getArtistesBySceneId :", e);
-        return [];
-    }
+    // On repasse par la fonction de programmation comme dans ton code d'origine
+    return await getProgrammationByScene(id); 
 }
 
 export async function getArtistesBySceneNom(nomScene) {
@@ -128,6 +122,7 @@ export async function getArtistesBySceneNom(nomScene) {
     }
 }
 
+// ---------------------------------
 
 export async function ajouterArtiste(nom, genre) {
     const data = { nom, genre };
