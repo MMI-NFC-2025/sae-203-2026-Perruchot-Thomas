@@ -1,7 +1,5 @@
 ---
-
 const { record, fileName, alt = "", class: className = "" } = Astro.props;
-
 
 const url = fileName 
   ? `http://127.0.0.1:8090/api/files/${record.collectionId}/${record.id}/${fileName}`

@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ArtisteCard from '../../components/ArtisteCard.astro';
-import { getArtistesByDateProgrammation } from '../../../backend/backend.mjs';
+import { getArtistesByDate } from '../../../backend/backend.mjs';
 
 export async function getStaticPaths() {
   return [
@@ -15,10 +15,10 @@ export async function getStaticPaths() {
 const { date } = Astro.params;
 const { pbDate } = Astro.props;
 
-// On récupère les artistes via le backend
-const artistes = await getArtistesByDateProgrammation(pbDate);
+// Appel de la fonction corrigée
+const artistes = await getArtistesByDate(pbDate);
 
-const navigationDates = [
+const nav = [
     { label: '28 OCT', slug: '28-octobre' },
     { label: '29 OCT', slug: '29-octobre' },
     { label: '30 OCT', slug: '30-octobre' },
@@ -26,34 +26,30 @@ const navigationDates = [
 ];
 ---
 
-<Layout title={`Artistes - ${date}`}>
-  <main class="grille py-20">
+<Layout title={`Programmation - ${date}`}>
+  <main class="max-w-7xl mx-auto px-6 py-24">
+    <h1 class="font-display text-8xl text-white mb-16 uppercase italic">Artistes</h1>
     
-    <h1 class="col-span-12 font-display text-8xl text-beige-100 mb-12 uppercase italic">
-        Artistes
-    </h1>
-
-    <div class="col-span-12 flex flex-wrap gap-4 mb-20">
-      {navigationDates.map((d) => (
-        <a 
-          href={`/artistes/${d.slug}`}
-          class={`px-10 py-3 rounded-full font-body font-bold border-2 border-beige-100 transition-all
-            ${date === d.slug ? 'bg-beige-100 text-vert-500' : 'text-beige-100 hover:bg-beige-100 hover:text-vert-500'}`}
-        >
-          {d.label}
+    <div class="flex flex-wrap gap-4 mb-20">
+      {nav.map((item) => (
+        <a href={`/artistes/${item.slug}`} 
+           class={`px-10 py-3 rounded-full border-2 border-white font-bold transition-all
+           ${date === item.slug ? 'bg-white text-black' : 'text-white hover:bg-white hover:text-black'}`}>
+          {item.label}
         </a>
       ))}
     </div>
 
-    <div class="col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
       {artistes.length > 0 ? (
-        artistes.map((artiste) => (
-          <ArtisteCard artiste={artiste} />
-        ))
+        artistes.map((a) => <ArtisteCard artiste={a} />)
       ) : (
-        <p class="col-span-12 text-beige-100 italic opacity-60 py-20 text-center border-2 border-dashed border-beige-100">
-            Aucun artiste trouvé pour cette date. (Vérifiez les API Rules de PocketBase)
-        </p>
+        <div class="col-span-full py-20 text-center border-2 border-dashed border-white/20 rounded-xl">
+            <p class="text-white/50 italic text-xl text-center">
+                Aucun artiste programmé pour le {date.replace('-', ' ')}.<br/>
+                Vérifie l'année (2026) dans PocketBase.
+            </p>
+        </div>
       )}
     </div>
   </main>

@@ -68,24 +68,20 @@ export async function saveScene(sceneData) {
         return await pb.collection('scenes').create(sceneData);
     }
 }
-export async function getArtistesByDateProgrammation(dateSelectionnee) {
+
+export async function getArtistesByDate(dateSelectionnee) {
     try {
         const records = await pb.collection('programmation').getFullList({
-            // Cherche la date (ex: 2026-10-28) dans ton champ date (qui contient l'heure)
             filter: `date ~ "${dateSelectionnee}"`,
-            expand: 'artiste', // INDISPENSABLE pour récupérer les noms/photos
+            expand: 'artiste',
         });
-
-        // Comme tu as plusieurs badges (IDs) dans ta capture d'écran,
-        // reg.expand.artiste est un TABLEAU. On utilise flatMap pour tout fusionner.
         const artistes = records.flatMap(reg => reg.expand?.artiste || []);
-        
-        // On nettoie les doublons au cas où un artiste joue deux fois le même jour
-        const uniqueArtistes = Array.from(new Map(artistes.map(a => [a.id, a])).values());
-
-        return uniqueArtistes;
+        return Array.from(new Map(artistes.map(a => [a.id, a])).values());
     } catch (e) {
-        console.error("Erreur PB :", e);
+        console.error("Erreur filtrage :", e);
         return [];
     }
+}
+export async function getAllArtistes() {
+    return await pb.collection('artiste').getFullList();
 }
