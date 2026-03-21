@@ -1,0 +1,85 @@
+---
+import '../styles/global.css';
+---
+
+<header class="bg-vert-500 py-12 px-8 flex justify-between items-center relative z-50">
+  <div class="flex-1"></div> 
+
+  <a href="/" class="text-beige-100 font-display text-[40px] uppercase tracking-wider relative z-[60]">
+    ECHO SONORE
+  </a>
+
+  <div class="flex-1 flex justify-end">
+    <button id="menu-toggle" class="group flex flex-col gap-2 items-end cursor-pointer focus:outline-none relative z-[60]" aria-label="Menu">
+      <span id="line1" class="block w-8 h-[2px] bg-beige-100 rounded-full transition-all duration-300"></span>
+      <span id="line2" class="block w-5 h-[2px] bg-beige-100 rounded-full transition-all duration-300"></span>
+      <span id="line3" class="block w-8 h-[2px] bg-beige-100 rounded-full transition-all duration-300"></span>
+    </button>
+  </div>
+
+  <div id="menu-overlay" class="fixed inset-0 bg-vert-300 -translate-y-full transition-transform duration-500 ease-in-out z-[55] flex flex-col pt-40 pb-12">
+    <div class="grille h-full flex flex-col justify-between">
+      
+      <nav class="col-span-12 lg:col-span-8 flex flex-col gap-4">
+        <a href="/" class="text-beige-100 font-display text-5xl md:text-7xl hover:text-vert-500 transition uppercase">Accueil</a>
+        <a href="/a-propos" class="text-beige-100 font-display text-5xl md:text-7xl hover:text-vert-500 transition uppercase">À propos</a>
+        <a href="/programme" class="text-beige-100 font-display text-5xl md:text-7xl hover:text-vert-500 transition uppercase">Programme</a>
+        <a href="/artistes" class="text-beige-100 font-display text-5xl md:text-7xl hover:text-vert-500 transition uppercase">Artistes</a>
+        <a href="/scenes" class="text-beige-100 font-display text-5xl md:text-7xl hover:text-vert-500 transition uppercase">Scènes</a>
+        <a href="/infos" class="text-beige-100 font-display text-5xl md:text-7xl hover:text-vert-500 transition uppercase">Infos pratiques</a>
+        <a href="/contact" class="text-beige-100 font-display text-5xl md:text-7xl hover:text-vert-500 transition uppercase">Contact</a>
+      </nav>
+
+      <div class="col-span-12 flex flex-col md:flex-row justify-between items-end mt-10">
+        <div class="flex flex-col gap-6">
+            <div class="flex gap-5">
+                <a href="#" class="w-8 h-8 bg-beige-100" style="mask: url('/facebook.svg') no-repeat center / contain; -webkit-mask: url('/facebook.svg') no-repeat center / contain;"></a>
+                <a href="#" class="w-8 h-8 bg-beige-100" style="mask: url('/instagram.svg') no-repeat center / contain; -webkit-mask: url('/instagram.svg') no-repeat center / contain;"></a>
+                <a href="#" class="w-8 h-8 bg-beige-100" style="mask: url('/twitter.svg') no-repeat center / contain; -webkit-mask: url('/twitter.svg') no-repeat center / contain;"></a>
+            </div>
+            <div class="font-body text-corp-md text-beige-100">
+                <p>Mentions légales</p>
+                <p>contact@echosonore.fr</p>
+            </div>
+        </div>
+        <div class="text-right">
+            <p class="font-body text-corp-sm font-bold uppercase text-beige-100 mt-1">© Echo Sonore</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-toggle');
+  const overlay = document.getElementById('menu-overlay');
+  const l1 = document.getElementById('line1');
+  const l2 = document.getElementById('line2');
+  const l3 = document.getElementById('line3');
+
+  btn?.addEventListener('click', () => {
+    // Ouverture depuis le haut
+    overlay?.classList.toggle('-translate-y-full');
+    
+    // Transformation en CROIX
+    l1?.classList.toggle('rotate-45');
+    l1?.classList.toggle('translate-y-[10px]');
+    
+    l2?.classList.toggle('opacity-0');
+    l2?.classList.toggle('translate-x-4');
+    
+    l3?.classList.toggle('-rotate-45');
+    l3?.classList.toggle('-translate-y-[10px]');
+    l3?.classList.toggle('w-8'); // Force la barre du bas à rester pleine
+    
+    document.body.classList.toggle('overflow-hidden');
+  });
+</script>
+
+<style>
+  /* On s'assure que Anton est bien appliqué via la classe font-display */
+  #menu-overlay a {
+    font-family: 'Anton', sans-serif;
+  }
+</style>

@@ -1,0 +1,70 @@
+---
+/* Footer avec icônes personnalisées depuis /public */
+---
+<footer class="bg-vert-500 pt-16 pb-8 text-beige-100">
+  <div class="grid-container px-6">
+    
+    <h2 class="text-beige-100 font-display text-titre-md md:text-titre-lg leading-none mb-12 uppercase">
+    Vibrez au rythme <br /> de la nature 
+    </h2>
+
+    <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+      
+      <div class="flex flex-col gap-10">
+        
+        <nav class="flex flex-col gap-2 font-body font-bold text-corp-lg uppercase">
+          <a href="/" class="hover:text-jaune-200 transition">Accueil</a>
+          <a href="/a-propos" class="hover:text-jaune-200 transition">À propos</a>
+          <a href="/programme" class="hover:text-jaune-200 transition">Programme</a>
+          <a href="/artistes" class="hover:text-jaune-200 transition">Artistes</a>
+          <a href="/scenes" class="hover:text-jaune-200 transition">Scènes</a>
+          <a href="/infos" class="hover:text-jaune-200 transition">Infos pratiques</a>
+          <a href="/contact" class="hover:text-jaune-200 transition">Contact</a>
+        </nav>
+
+        <div class="flex gap-6">
+
+  <a href="https://twitter.com" target="_blank" aria-label="Twitter" class="hover:scale-110 transition-transform">
+    <div class="w-10 h-10 bg-beige-100" 
+         style="mask: url('/twitter.svg') no-repeat center / contain; -webkit-mask: url('/twitter.svg') no-repeat center / contain;">
+    </div>
+  </a>
+
+  <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="hover:scale-110 transition-transform">
+    <div class="w-10 h-10 bg-beige-100" 
+         style="mask: url('/instagram.svg') no-repeat center / contain; -webkit-mask: url('/instagram.svg') no-repeat center / contain;">
+    </div>
+  </a>
+
+  <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="hover:scale-110 transition-transform">
+    <div class="w-10 h-10 bg-beige-100" 
+         style="mask: url('/facebook.svg') no-repeat center / contain; -webkit-mask: url('/facebook.svg') no-repeat center / contain;">
+    </div>
+  </a>
+
+</div>
+
+        <div class="flex flex-col gap-1 font-body text-corp-md font-normal opacity-90">
+          <a href="/mentions" class="hover:text-jaune-200">Mentions légales</a>
+          <a href="mailto:contact@echosonore.fr" class="hover:text-jaune-200">contact@echosonore.fr</a>
+        </div>
+      </div>
+
+      <div class="flex flex-col justify-end md:self-end text-left md:text-right">
+        <p class="font-body text-corp-sm font-bold uppercase tracking-widest">© Echo Sonore</p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<style>
+  .icon-mask {
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+  }
+</style>

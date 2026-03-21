@@ -1,1 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import "tailwindcss";
+
+@theme {
+
+  --color-vert-500: #195e24;
+  --color-vert-300: #56a963;
+  --color-beige-100: #e1ded6;
+  --color-noir-400: #1e1e1e;
+  --color-jaune-200: #eec453;
+
+  --font-display: "Anton", sans-serif;
+  --font-body: "Helvetica", "Arial", sans-serif;
+
+  --text-titre-lg: 40px;
+  --text-titre-md: 36px;
+  --text-corp-xl: 20px;
+  --text-corp-lg: 16px;
+  --text-corp-md: 13px;
+
+  --my-grid: 12;
+}
+
+@layer base {
+  body {
+    @apply bg-vert-500 text-beige-100 font-body antialiased;
+  }
+  
+  .font-display {
+    font-family: 'Anton', sans-serif !important;
+  }
+}
+
+@layer components {
+
+  .grille {
+    @apply px-6 mx-auto w-full max-w-[1600px];
+ 
+    @apply lg:grid lg:grid-cols-(--my-grid) lg:gap-8;
+  }
+}

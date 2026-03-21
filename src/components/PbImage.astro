@@ -1,0 +1,22 @@
+---
+// src/components/PbImage.astro
+const { 
+  record,        // L'objet complet (ex: artiste)
+  fileName,      // Le nom du fichier image (ex: artiste.image)
+  alt = "",      // Texte alternatif
+  class: className = "" // Classes CSS (Tailwind)
+} = Astro.props;
+
+// Construction de l'URL PocketBase
+// On utilise l'ID de la collection, l'ID du record et le nom du fichier
+const url = fileName 
+  ? `http://127.0.0.1:8090/api/files/${record.collectionId}/${record.id}/${fileName}`
+  : '/placeholder.jpg'; // Image par défaut si vide
+---
+
+<img 
+  src={url} 
+  alt={alt} 
+  class={className} 
+  loading="lazy"
+/>

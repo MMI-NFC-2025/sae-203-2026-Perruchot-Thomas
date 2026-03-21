@@ -68,3 +68,20 @@ export async function saveScene(sceneData) {
         return await pb.collection('scenes').create(sceneData);
     }
 }
+
+/**
+ * Récupérer les artistes programmés à une date précise
+ * @param {string} 
+ */
+export async function getArtistesByDateProgrammation(dateSelectionnee) {
+    try {
+        const records = await pb.collection('programmation').getFullList({
+            filter: `date ~ "${dateSelectionnee}"`, 
+            expand: 'artiste',
+        });
+        return records.map(reg => reg.expand?.artiste).filter(a => a !== undefined);
+    } catch (e) {
+        console.error("Erreur PocketBase :", e);
+        return [];
+    }
+}
