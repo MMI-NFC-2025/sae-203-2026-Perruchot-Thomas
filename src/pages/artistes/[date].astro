@@ -1,23 +1,24 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-// On importe la fonction qui récupère TOUS les artistes (sans filtre de date)
-import { getAllArtistes } from '../../../backend/backend.mjs';
+import ArtisteCard from '../../components/ArtisteCard.astro';
+import { getArtistesByDateProgrammation } from '../../../backend/backend.mjs';
 
 export async function getStaticPaths() {
   return [
-    { params: { date: '28-octobre' } },
-    { params: { date: '29-octobre' } },
-    { params: { date: '30-octobre' } },
-    { params: { date: '31-octobre' } },
+    { params: { date: '28-octobre' }, props: { pbDate: '2026-10-28' } },
+    { params: { date: '29-octobre' }, props: { pbDate: '2026-10-29' } },
+    { params: { date: '30-octobre' }, props: { pbDate: '2026-10-30' } },
+    { params: { date: '31-octobre' }, props: { pbDate: '2026-10-31' } },
   ];
 }
 
 const { date } = Astro.params;
+const { pbDate } = Astro.props;
 
-// ÉTAPE DE TEST : On récupère tout le monde pour voir si ça s'affiche
-const artistes = await getAllArtistes();
+// On récupère les artistes via le backend
+const artistes = await getArtistesByDateProgrammation(pbDate);
 
-const datesNav = [
+const navigationDates = [
     { label: '28 OCT', slug: '28-octobre' },
     { label: '29 OCT', slug: '29-octobre' },
     { label: '30 OCT', slug: '30-octobre' },
@@ -25,7 +26,7 @@ const datesNav = [
 ];
 ---
 
-<Layout title={`Artistes - ${date.replace('-', ' ')}`}>
+<Layout title={`Artistes - ${date}`}>
   <main class="grille py-20">
     
     <h1 class="col-span-12 font-display text-8xl text-beige-100 mb-12 uppercase italic">
@@ -33,10 +34,10 @@ const datesNav = [
     </h1>
 
     <div class="col-span-12 flex flex-wrap gap-4 mb-20">
-      {datesNav.map((d) => (
+      {navigationDates.map((d) => (
         <a 
           href={`/artistes/${d.slug}`}
-          class={`px-10 py-3 rounded-full font-body font-bold text-corp-lg transition-all border-2 border-beige-100 
+          class={`px-10 py-3 rounded-full font-body font-bold border-2 border-beige-100 transition-all
             ${date === d.slug ? 'bg-beige-100 text-vert-500' : 'text-beige-100 hover:bg-beige-100 hover:text-vert-500'}`}
         >
           {d.label}
@@ -47,37 +48,13 @@ const datesNav = [
     <div class="col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
       {artistes.length > 0 ? (
         artistes.map((artiste) => (
-          <div class="group flex flex-col bg-transparent">
-            <div class="relative aspect-square overflow-hidden bg-vert-300 mb-6">
-              {artiste.image ? (
-                <img 
-                  src={`http://127.0.0.1:8090/api/files/${artiste.collectionId}/${artiste.id}/${artiste.image}`} 
-                  alt={artiste.nom}
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              ) : (
-                <div class="w-full h-full flex items-center justify-center bg-vert-300 text-beige-100 font-body italic">Photo bientôt disponible</div>
-              )}
-            </div>
-            
-            <div class="flex flex-col border-t border-beige-100 pt-4">
-              <h3 class="font-display text-4xl text-beige-100 uppercase italic leading-none mb-2">
-                {artiste.nom}
-              </h3>
-              <p class="font-body text-corp-lg text-beige-100 opacity-80 uppercase tracking-widest">
-                {artiste.genre || "Performance"}
-              </p>
-            </div>
-          </div>
+          <ArtisteCard artiste={artiste} />
         ))
       ) : (
-        <div class="col-span-12 py-20 text-center border-2 border-dashed border-beige-100 rounded-lg">
-            <p class="font-body text-beige-100 text-xl italic">
-                Aucun artiste n'a été trouvé pour le {date.replace('-', ' ')}.
-            </p>
-        </div>
+        <p class="col-span-12 text-beige-100 italic opacity-60 py-20 text-center border-2 border-dashed border-beige-100">
+            Aucun artiste trouvé pour cette date. (Vérifiez les API Rules de PocketBase)
+        </p>
       )}
     </div>
-
   </main>
 </Layout>
