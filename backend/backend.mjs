@@ -2,12 +2,19 @@ import PocketBase from "pocketbase";
 const pb = new PocketBase('http://127.0.0.1:8090');
 
 // 1. Liste des artistes triés par date de représentation
-export async function getArtistesByDate() {
-    const records = await pb.collection('programmation').getFullList({
-        sort: 'date',
-        expand: 'artiste',
-    });
-    return records.flatMap(reg => reg.expand?.artiste || []);
+export async function getArtistesByDate(dateSelectionnee) {
+    try {
+        const records = await pb.collection('programmation').getFullList({
+            filter: `date ~ "${dateSelectionnee}"`,
+            expand: 'artiste',
+        });
+        const artistes = records.flatMap(reg => reg.expand?.artiste || []);
+        return Array.from(new Map(artistes.map(a => [a.id, a])).values());
+    } catch (e) {
+        console.error("Erreur filtrage :", e);
+        console.log("Données reçues de PB :", records);
+        return [];
+    }
 }
 
 // 2. Liste de toutes les scènes triées par nom
@@ -67,21 +74,4 @@ export async function saveScene(sceneData) {
     } else {
         return await pb.collection('scenes').create(sceneData);
     }
-}
-
-export async function getArtistesByDate(dateSelectionnee) {
-    try {
-        const records = await pb.collection('programmation').getFullList({
-            filter: `date ~ "${dateSelectionnee}"`,
-            expand: 'artiste',
-        });
-        const artistes = records.flatMap(reg => reg.expand?.artiste || []);
-        return Array.from(new Map(artistes.map(a => [a.id, a])).values());
-    } catch (e) {
-        console.error("Erreur filtrage :", e);
-        return [];
-    }
-}
-export async function getAllArtistes() {
-    return await pb.collection('artiste').getFullList();
 }

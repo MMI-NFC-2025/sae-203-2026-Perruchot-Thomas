@@ -64,3 +64,27 @@ async function t8_save() {
 // await t5_sceneId("e6057f703o3lbai");
 // await t7_artistesParSceneNom("SCÈNE UBUNTU");
 // await t8_save();
+
+async function test() {
+    console.log("--- Début du test ---");
+    
+    // Remplace par une date qui existe dans ton PocketBase (ex: 2026-10-31)
+    const dateATester = "2026-10-31"; 
+    
+    const artistes = await getArtistesByDate(dateATester);
+    
+    console.log(`Test pour la date : ${dateATester}`);
+    console.log(`Nombre d'artistes trouvés : ${artistes.length}`);
+    
+    if (artistes.length > 0) {
+        artistes.forEach(a => {
+            console.log(`- Artiste trouvé : ${a.nom} (Genre : ${a.genre})`);
+        });
+    } else {
+        console.log("Aucun artiste trouvé. Vérifiez vos API Rules ou le format de la date.");
+    }
+    
+    console.log("--- Fin du test ---");
+}
+
+test();
