@@ -1,0 +1,103 @@
+---
+export const prerender = true;
+
+import Layout from '../../layouts/Layout.astro';
+import { getAllScenes, getSceneById, getProgrammationByScene } from '../../../backend/backend.mjs';
+
+export async function getStaticPaths() {
+    const scenes = await getAllScenes();
+    return scenes.map((s) => ({
+        params: { id: s.id },
+        props: { scene: s },
+    }));
+}
+
+const { id } = Astro.params;
+const { scene } = Astro.props;
+
+// Appel de la fonction backend
+const programmation = await getProgrammationByScene(id);
+const toutesLesScenes = await getAllScenes();
+
+const datesFestival = [
+    { label: '28 OCT', iso: '2026-10-28' },
+    { label: '29 OCT', iso: '2026-10-29' },
+    { label: '30 OCT', iso: '2026-10-30' },
+    { label: '31 OCT', iso: '2026-10-31' },
+];
+---
+
+<Layout title={`Scène - ${scene.nom}`}>
+  <main>
+    <div class="bg-beige-100 py-16 mb-0">
+        <div class="grille">
+            <div class="col-span-12">
+                <h1 class="text-vert-500 font-display text-[40px] md:text-[60px] uppercase tracking-wider mb-2">
+                    {scene.nom}
+                </h1>
+                <p class="font-body text-vert-500 text-corp-lg italic max-w-2xl">
+                    {scene.description}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <section class="w-full h-[400px] md:h-[600px] overflow-hidden block">
+        <img 
+            src={`${import.meta.env.PUBLIC_PB_URL}/api/files/${scene.collectionId}/${scene.id}/${scene.photo}`} 
+            alt={scene.nom} 
+            class="w-full h-full object-cover block"
+        />
+    </section>
+
+    <div class="bg-vert-500 py-12">
+        <div class="grille">
+            <div class="col-span-12">
+                <h2 class="text-beige-100 font-display text-[32px] uppercase mb-10 text-center">Choix de la scène</h2>
+                <div class="flex flex-wrap justify-center gap-8">
+                    {toutesLesScenes.map((s) => (
+                        <a href={`/scenes/${s.id}`} 
+                           class={`px-8 py-4 rounded-2xl border-2 border-beige-100 font-bold transition-all text-center min-w-[200px] shadow-lg
+                           ${id === s.id 
+                            ? 'bg-beige-100 text-vert-500' 
+                            : 'bg-vert-500 text-beige-100 hover:bg-beige-100 hover:text-vert-500'}`}>
+                          {s.nom}
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="bg-vert-500 pb-24 px-4">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            
+            {datesFestival.map((date) => {
+                const jourProg = programmation.find(p => p.date.startsWith(date.iso));
+                
+                return (
+                    <div class="flex flex-col gap-8 p-6 rounded-3xl border-2 border-beige-100/20 bg-vert-500/50">
+                        <div class="border-b-2 border-beige-100 pb-4">
+                            <h3 class="font-display text-4xl text-beige-100">{date.label}</h3>
+                        </div>
+                        
+                        <div class="flex flex-col gap-4">
+    {jourProg && jourProg.expand?.artiste ? (
+        (jourProg.expand.artiste as any[]).map((art) => (
+            <a href={`/artistes/${art.id}`} class="group w-fit">
+                <p class="font-body text-xl font-bold text-beige-100 uppercase transition-all group-hover:text-vert-300">
+                    {art.nom}
+                </p>
+            </a>
+        ))
+    ) : (
+        <p class="font-body text-beige-100/30 italic uppercase">Aucun concert</p>
+    )}
+</div>
+                    </div>
+                )
+            })}
+        </div>
+    </section>
+  </main>
+</Layout>

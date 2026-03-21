@@ -10,10 +10,10 @@ import '../styles/global.css';
   </a>
 
   <div class="flex-1 flex justify-end">
-    <button id="menu-toggle" class="group flex flex-col gap-2 items-end cursor-pointer focus:outline-none relative z-[60]" aria-label="Menu">
-      <span id="line1" class="block w-8 h-[2px] bg-beige-100 rounded-full transition-all duration-300"></span>
+    <button id="menu-toggle" class="group relative flex flex-col justify-center items-end cursor-pointer focus:outline-none z-[60] h-10 w-10" aria-label="Menu">
+      <span id="line1" class="block w-8 h-[2px] bg-beige-100 rounded-full transition-all duration-300 translate-y-[-8px]"></span>
       <span id="line2" class="block w-5 h-[2px] bg-beige-100 rounded-full transition-all duration-300"></span>
-      <span id="line3" class="block w-8 h-[2px] bg-beige-100 rounded-full transition-all duration-300"></span>
+      <span id="line3" class="block w-8 h-[2px] bg-beige-100 rounded-full transition-all duration-300 translate-y-[8px]"></span>
     </button>
   </div>
 
@@ -61,21 +61,24 @@ import '../styles/global.css';
   btn?.addEventListener('click', () => {
     overlay?.classList.toggle('-translate-y-full');
     
+    // Animation de la croix
+    // On retire le décalage initial (8px) pour les mettre au centre, puis on tourne
+    l1?.classList.toggle('translate-y-[8px]'); // Annule le décalage négatif
     l1?.classList.toggle('rotate-45');
-    l1?.classList.toggle('translate-y-[10px]');
+    l1?.classList.toggle('absolute'); // Force la superposition
     
     l2?.classList.toggle('opacity-0');
-    l2?.classList.toggle('translate-x-4');
     
+    l3?.classList.toggle('translate-y-[-8px]'); // Annule le décalage positif
     l3?.classList.toggle('-rotate-45');
-    l3?.classList.toggle('-translate-y-[10px]');
-    l3?.classList.toggle('w-8');
+    l3?.classList.toggle('absolute'); // Force la superposition
     
     document.body.classList.toggle('overflow-hidden');
   });
 </script>
 
 <style>
-  #menu-overlay a {
+  #line1, #line2, #line3 {
+    transform-origin: center;
   }
 </style>

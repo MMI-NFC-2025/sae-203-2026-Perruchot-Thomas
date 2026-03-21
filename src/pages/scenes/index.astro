@@ -1,0 +1,59 @@
+---
+export const prerender = true;
+
+import Layout from '../../layouts/Layout.astro';
+import { getAllScenes } from '../../../backend/backend.mjs';
+import ImgPb from '../../components/PbImage.astro'; // Assure-toi du nom exact de ton composant image
+
+const toutesLesScenes = await getAllScenes();
+---
+
+<Layout title="Nos Scènes - ECHO SONORE">
+  <main class="flex flex-col overflow-x-hidden pb-32">
+    
+    <div class="bg-beige-100 py-20 mb-20">
+        <div class="grille">
+            <div class="col-span-12">
+                <h1 class="text-vert-500 font-display text-[50px] md:text-[80px] uppercase tracking-wider mb-4 leading-none">
+                    SCÈNES
+                </h1>
+                <p class="font-body text-vert-500 text-xl md:text-2xl italic max-w-2xl opacity-90">
+                    Pour sa première édition, le festival ECHO SONORE dispose de deux scènes. Venez les découvrir avec nous !
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <section class="grille gap-y-24">
+        {toutesLesScenes.map((scene) => (
+            <div class="col-span-12 lg:col-span-6 flex flex-col items-center px-4 group">
+                
+                <div class="w-full aspect-video md:aspect-square overflow-hidden rounded-[40px] border-[12px] border-beige-100 shadow-2xl mb-8 transition-transform duration-500 group-hover:scale-[1.02]">
+                    <ImgPb 
+                        collectionId={scene.collectionId} 
+                        id={scene.id} 
+                        nomFichier={scene.photo} 
+                        class="w-full h-full object-cover"
+                    />
+                </div>
+
+                <h2 class="font-display text-4xl md:text-6xl text-beige-100 uppercase text-center mb-8">
+                    {scene.nom}
+                </h2>
+
+                <a href={`/scenes/${scene.id}`} 
+                   class="bg-beige-100 text-vert-500 font-body font-bold uppercase px-10 py-4 rounded-2xl hover:bg-white transition-all shadow-lg active:scale-95 text-lg">
+                    VOIR LA SCÈNE
+                </a>
+            </div>
+        ))}
+
+        {toutesLesScenes.length === 0 && (
+            <div class="col-span-12 text-center py-20">
+                <p class="text-beige-100 font-body italic opacity-50">Chargement des scènes ou aucune scène disponible...</p>
+            </div>
+        )}
+    </section>
+
+  </main>
+</Layout>
