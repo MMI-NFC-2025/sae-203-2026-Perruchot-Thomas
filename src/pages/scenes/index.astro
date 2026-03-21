@@ -3,7 +3,7 @@ export const prerender = true;
 
 import Layout from '../../layouts/Layout.astro';
 import { getAllScenes } from '../../../backend/backend.mjs';
-import ImgPb from '../../components/PbImage.astro'; // Assure-toi du nom exact de ton composant image
+import ImgPb from '../../components/PbImage.astro';
 
 const toutesLesScenes = await getAllScenes();
 ---
@@ -28,32 +28,26 @@ const toutesLesScenes = await getAllScenes();
         {toutesLesScenes.map((scene) => (
             <div class="col-span-12 lg:col-span-6 flex flex-col items-center px-4 group">
                 
-                <div class="w-full aspect-video md:aspect-square overflow-hidden rounded-[40px] border-[12px] border-beige-100 shadow-2xl mb-8 transition-transform duration-500 group-hover:scale-[1.02]">
+                <div class="w-full aspect-square max-w-[480px] overflow-hidden rounded-[40px] border-[12px] border-beige-100 shadow-2xl mb-8 transition-transform duration-500 group-hover:scale-[1.02]">
                     <ImgPb 
-                        collectionId={scene.collectionId} 
-                        id={scene.id} 
-                        nomFichier={scene.photo} 
+                        record={scene} 
+                        fileName={scene.photo} 
+                        alt={scene.nom} 
                         class="w-full h-full object-cover"
                     />
                 </div>
+                <div class="w-full max-w-[480px] flex flex-col items-start">
+                    <h2 class="font-display text-4xl md:text-6xl text-beige-100 uppercase text-left mb-8">
+                        {scene.nom}
+                    </h2>
 
-                <h2 class="font-display text-4xl md:text-6xl text-beige-100 uppercase text-center mb-8">
-                    {scene.nom}
-                </h2>
-
-                <a href={`/scenes/${scene.id}`} 
-                   class="bg-beige-100 text-vert-500 font-body font-bold uppercase px-10 py-4 rounded-2xl hover:bg-white transition-all shadow-lg active:scale-95 text-lg">
-                    VOIR LA SCÈNE
-                </a>
+                    <a href={`/scenes/${scene.id}`} 
+                       class="bg-beige-100 text-vert-500 font-body font-bold uppercase px-10 py-4 rounded-2xl hover:bg-white transition-all shadow-lg active:scale-95 text-lg">
+                        VOIR LA SCÈNE
+                    </a>
+                </div>
             </div>
         ))}
-
-        {toutesLesScenes.length === 0 && (
-            <div class="col-span-12 text-center py-20">
-                <p class="text-beige-100 font-body italic opacity-50">Chargement des scènes ou aucune scène disponible...</p>
-            </div>
-        )}
     </section>
-
   </main>
 </Layout>

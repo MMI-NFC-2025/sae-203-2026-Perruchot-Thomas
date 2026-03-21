@@ -1,8 +1,11 @@
 ---
-const { record, fileName, alt = "", class: className = "" } = Astro.props;
+const { record, collectionId, id, fileName, alt = "", class: className = "" } = Astro.props;
 
-const url = fileName 
-  ? `http://127.0.0.1:8090/api/files/${record.collectionId}/${record.id}/${fileName}`
+const finalCollectionId = record?.collectionId || collectionId;
+const finalId = record?.id || id;
+
+const url = fileName && finalCollectionId && finalId
+  ? `http://127.0.0.1:8090/api/files/${finalCollectionId}/${finalId}/${fileName}`
   : '/placeholder.jpg';
 ---
 <img src={url} alt={alt} class={className} loading="lazy" />
