@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import Layout from '../../layouts/Layout.astro';
 import ArtisteCard from '../../components/ArtisteCard.astro';
 import { getArtistesByDate } from '../../../backend/backend.mjs';
@@ -15,42 +17,69 @@ export async function getStaticPaths() {
 const { date } = Astro.params;
 const { pbDate } = Astro.props;
 
-// Appel de la fonction corrigée
 const artistes = await getArtistesByDate(pbDate);
 
 const nav = [
-    { label: '28 OCT', slug: '28-octobre' },
-    { label: '29 OCT', slug: '29-octobre' },
-    { label: '30 OCT', slug: '30-octobre' },
-    { label: '31 OCT', slug: '31-octobre' },
+    { day: '28 octobre', year: '2026', slug: '28-octobre' },
+    { day: '29 octobre', year: '2026', slug: '29-octobre' },
+    { day: '30 octobre', year: '2026', slug: '30-octobre' },
+    { day: '31 octobre', year: '2026', slug: '31-octobre' },
 ];
 ---
 
 <Layout title={`Programmation - ${date}`}>
-  <main class="max-w-7xl mx-auto px-6 py-24">
-    <h1 class="font-display text-8xl text-white mb-16 uppercase italic">Artistes</h1>
-    
-    <div class="flex flex-wrap gap-4 mb-20">
-      {nav.map((item) => (
-        <a href={`/artistes/${item.slug}`} 
-           class={`px-10 py-3 rounded-full border-2 border-white font-bold transition-all
-           ${date === item.slug ? 'bg-white text-black' : 'text-white hover:bg-white hover:text-black'}`}>
-          {item.label}
-        </a>
-      ))}
+  <main>
+    <div class="bg-beige-100 py-16 mb-12">
+        <div class="grille">
+            <div class="col-span-12">
+                <h1 class="text-vert-500 font-display text-[40px] uppercase tracking-wider mb-2">
+                    Artistes
+                </h1>
+                <p class="font-body text-vert-500 text-corp-lg italic">
+                    Découvrez les artistes présents à notre événement !
+                </p>
+            </div>
+        </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
-      {artistes.length > 0 ? (
-        artistes.map((a) => <ArtisteCard artiste={a} />)
-      ) : (
-        <div class="col-span-full py-20 text-center border-2 border-dashed border-white/20 rounded-xl">
-            <p class="text-white/50 italic text-xl text-center">
-                Aucun artiste programmé pour le {date.replace('-', ' ')}.<br/>
-                Vérifie l'année (2026) dans PocketBase.
-            </p>
+    <div class="grille">
+        <div class="col-span-12 mb-12">
+            <h2 class="text-beige-100 font-display text-[32px] uppercase mb-6 text-center">Dates</h2>
+            <div class="flex flex-wrap justify-center gap-6">
+              {nav.map((item) => (
+                <a href={`/artistes/${item.slug}`} 
+                   class={`px-8 py-4 rounded-xl border-2 border-beige-100 font-bold transition-all text-center leading-tight
+                   ${date === item.slug 
+                    ? 'bg-vert-500 text-beige-100' 
+                    : 'bg-beige-100 text-vert-500 hover:bg-vert-500 hover:text-beige-100'}`}>
+                  {item.day} <br /> <span class="text-sm opacity-80">{item.year}</span>
+                </a>
+              ))}
+            </div>
         </div>
-      )}
+
+        <div class="col-span-12 max-w-2xl mx-auto w-full mb-20">
+            <h2 class="text-beige-100 font-display text-[32px] uppercase mb-4 text-center">Rechercher un artiste</h2>
+            <div class="relative">
+                <input 
+                    type="text" 
+                    placeholder="nom ou style" 
+                    class="w-full bg-beige-100 text-vert-500 placeholder:text-vert-500/60 py-4 px-6 rounded-2xl font-body focus:outline-none focus:ring-2 focus:ring-vert-500"
+                />
+            </div>
+        </div>
+
+        <div class="col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 mb-24">
+          {artistes.length > 0 ? (
+            artistes.map((a) => <ArtisteCard artiste={a} />)
+          ) : (
+            <div class="col-span-full py-20 text-center border-2 border-dashed border-white/20 rounded-xl">
+                <p class="text-white/50 italic text-xl text-center">
+                    Aucun artiste programmé pour cette date.
+                </p>
+            </div>
+          )}
+        </div>
     </div>
   </main>
 </Layout>

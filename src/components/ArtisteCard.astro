@@ -1,18 +1,26 @@
 ---
+// src/components/ArtisteCard.astro
 import PbImage from './PbImage.astro';
 const { artiste } = Astro.props;
 ---
-<div class="group flex flex-col bg-transparent">
-  <div class="relative aspect-square overflow-hidden bg-slate-800 mb-6 rounded-lg">
-    <PbImage 
-      record={artiste} 
-      fileName={artiste.photo} 
-      alt={artiste.nom} 
-      class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-    />
+<a href={`/artistes/detail/${artiste.id}`} class="group flex flex-col bg-transparent">
+  <div class="bg-beige-100 p-3 rounded-[24px] mb-6 overflow-hidden">
+    <div class="relative aspect-[4/3] overflow-hidden rounded-[16px] bg-vert-500">
+      <PbImage 
+        record={artiste} 
+        fileName={artiste.photo} 
+        alt={artiste.nom} 
+        class="w-full h-full object-cover" 
+      />
+    </div>
   </div>
-  <div class="border-t border-white/20 pt-4">
-    <h2 class="font-display text-4xl text-white uppercase italic leading-none">{artiste.nom}</h2>
-    <p class="font-body text-white/70 uppercase mt-2 tracking-widest text-sm">{artiste.genre}</p>
+
+  <div class="flex flex-col items-start px-1">
+    <h3 class="font-body font-bold text-3xl text-beige-100 uppercase leading-tight">
+      {artiste.nom}
+    </h3>
+    <p class="font-body font-semibold text-sm text-beige-100 uppercase tracking-widest mt-1 opacity-90">
+      {artiste.genre}
+    </p>
   </div>
-</div>
+</a>
