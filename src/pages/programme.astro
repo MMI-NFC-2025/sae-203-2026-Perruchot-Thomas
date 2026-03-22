@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Programme - ECHO SONORE">
+  <main class="flex flex-col min-h-screen">
+    
+    <section class="bg-beige-100 py-24 w-full">
+      <div class="grille">
+        <div class="col-span-12 text-left">
+            <h1 class="text-vert-500 font-display text-[40px] uppercase tracking-wider mb-6">
+                PROGRAMME
+            </h1>
+            <p class="font-body text-vert-500 text-corp-lg italic max-w-3xl leading-relaxed">
+                Découvrez les activités qui vous seront proposées lors de notre événement ! 
+            </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="w-full h-2 bg-beige-100/50"></div>
+
+    <div class="bg-vert-300 py-24 flex-grow w-full">
+        <div class="grille h-full flex flex-col justify-between">
+            
+            <div class="col-span-12 grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-24 gap-y-24">
+                
+                <div class="flex flex-col items-start">
+                    <h2 class="font-display text-[40px] text-vert-500 uppercase leading-tight mb-8">
+                        ATELIER MAQUILLAGE
+                    </h2>
+                    <div class="bg-beige-100 p-4 rounded-[40px] shadow-sm mb-6 w-full max-w-2xl">
+                        <div class="aspect-video rounded-[40px] overflow-hidden">
+                            <img 
+                                src="/maquillageimg.webp" 
+                                alt="Atelier Maquillage" 
+                                class="w-full h-full object-cover"
+                            />
+                        </div>
+                    </div>
+                    <p class="font-body text-vert-500 text-lg leading-relaxed px-2 max-w-2xl">
+                        Venez vous faire maquiller et repartez prêts à briller au cœur du festival !
+                    </p>
+                </div>
+
+                <div class="flex flex-col items-start">
+                    <h2 class="font-display text-[40px] text-vert-500 uppercase leading-tight mb-8">
+                        BUVETTE
+                    </h2>
+                    <div class="bg-beige-100 p-4 rounded-[40px] shadow-sm mb-6 w-full max-w-2xl">
+                        <div class="aspect-video rounded-[40px] overflow-hidden">
+                            <img 
+                                src="/buvetteimg.webp" 
+                                alt="Buvette du festival" 
+                                class="w-full h-full object-cover"
+                            />
+                        </div>
+                    </div>
+                    <p class="font-body text-vert-500 text-lg leading-relaxed px-2 max-w-2xl">
+                        Venez vous rafraîchir à la buvette : boissons fraîches, bonne ambiance et énergie pour continuer la fête !
+                    </p>
+                </div>
+
+                <div class="flex flex-col items-start">
+                    <h2 class="font-display text-[40px] text-vert-500 uppercase leading-tight mb-8">
+                        STAND DE NOURRITURE
+                    </h2>
+                    <div class="bg-beige-100 p-4 rounded-[40px] shadow-sm mb-6 w-full max-w-2xl">
+                        <div class="aspect-video rounded-[40px] overflow-hidden">
+                            <img 
+                                src="/nourritureimg.webp" 
+                                alt="Stand de nourriture vegan" 
+                                class="w-full h-full object-cover"
+                            />
+                        </div>
+                    </div>
+                    <p class="font-body text-vert-500 text-lg leading-relaxed px-2 max-w-2xl">
+                        Venez savourer une cuisine vegan maison, saine et colorée, idéale pour continuer la fête le ventre léger.
+                    </p>
+                </div>
+
+                <div class="flex flex-col items-start">
+                    <h2 class="font-display text-[40px] text-vert-500 uppercase leading-tight mb-8">
+                        STAND PHOTO
+                    </h2>
+                    <div class="bg-beige-100 p-4 rounded-[40px] shadow-sm mb-6 w-full max-w-2xl">
+                        <div class="aspect-video rounded-[40px] overflow-hidden">
+                            <img 
+                                src="/photoimg.webp" 
+                                alt="Stand photo souvenir" 
+                                class="w-full h-full object-cover"
+                            />
+                        </div>
+                    </div>
+                    <p class="font-body text-vert-500 text-lg leading-relaxed px-2 max-w-2xl">
+                        Venez immortaliser votre passage au festival : posez au stand photo et repartez avec un souvenir unique !
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="col-span-12 flex justify-start pt-24 pb-12">
+                <a 
+                    href="/programme-echo-sonore.pdf" 
+                    download
+                    class="bg-vert-500 text-beige-100 font-body font-bold uppercase px-12 py-5 rounded-full text-lg shadow-2xl transition-all active:scale-95 border-2 border-vert-500 hover:bg-vert-600 text-center"
+                >
+                    TÉLÉCHARGER LE PROGRAMME
+                </a>
+            </div>
+
+        </div>
+    </div>
+  </main>
+</Layout>
