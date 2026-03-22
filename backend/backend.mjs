@@ -1,9 +1,7 @@
 import PocketBase from "pocketbase";
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase('https://echosonore.perruchot.optimiseus.fr');
 
-// --- ARTISTES ---
 
-/** Liste de tous les artistes triés par ordre alphabétique */
 export async function getAllArtistes() {
     try {
         return await pb.collection('artiste').getFullList({
@@ -15,7 +13,6 @@ export async function getAllArtistes() {
     }
 }
 
-/** Infos d'un artiste par son ID */
 export async function getArtisteById(id) {
     try {
         return await pb.collection('artiste').getOne(id);
@@ -25,7 +22,6 @@ export async function getArtisteById(id) {
     }
 }
 
-/** Ajouter ou modifier un artiste */
 export async function saveArtiste(artisteData) {
     try {
         if (artisteData.id) {
@@ -39,10 +35,6 @@ export async function saveArtiste(artisteData) {
     }
 }
 
-
-// --- SCÈNES ---
-
-/** Liste de toutes les scènes triées par nom */
 export async function getAllScenes() {
     try {
         return await pb.collection('scenes').getFullList({
@@ -54,7 +46,6 @@ export async function getAllScenes() {
     }
 }
 
-/** Infos d'une scène par son ID */
 export async function getSceneById(id) {
     try {
         return await pb.collection('scenes').getOne(id);
@@ -64,7 +55,6 @@ export async function getSceneById(id) {
     }
 }
 
-/** Ajouter ou modifier une scène */
 export async function saveScene(sceneData) {
     try {
         if (sceneData.id) {
@@ -78,17 +68,12 @@ export async function saveScene(sceneData) {
     }
 }
 
-
-// --- PROGRAMMATION & FILTRAGE ---
-
-/** Liste des artistes filtrés par date (évite les doublons d'artistes) */
 export async function getArtistesByDate(dateSelectionnee) {
     try {
         const records = await pb.collection('programmation').getFullList({
             filter: `date ~ "${dateSelectionnee}"`,
             expand: 'artiste',
         });
-        // On récupère tous les artistes du champ expand et on élimine les doublons avec une Map
         const artistes = records.flatMap(reg => reg.expand?.artiste || []);
         return Array.from(new Map(artistes.map(a => [a.id, a])).values());
     } catch (e) {
@@ -97,16 +82,48 @@ export async function getArtistesByDate(dateSelectionnee) {
     }
 }
 
-
 export async function getProgrammationByScene(id) {
     try {
         const records = await pb.collection('programmation').getFullList({
             filter: `scene = "${id}"`,
             expand: 'artiste',
+            sort: 'date',
         });
         return records;
     } catch (e) { 
         console.error('Erreur lors de la récupération de la programmation :', e);
+        return [];
+    }
+}
+
+
+
+
+export async function getAllArtistesSortedByDate() {
+    try {
+        const records = await pb.collection('programmation').getFullList({
+            sort: 'date',
+            expand: 'artiste',
+        });
+        return records;
+    } catch (e) {
+        console.error("Erreur getAllArtistesSortedByDate :", e);
+        return [];
+    }
+}
+
+
+export async function getArtistesBySceneId(id) {
+    return await getProgrammationByScene(id); 
+}
+
+
+export async function getArtistesBySceneNom(nomScene) {
+    try {
+        const scene = await pb.collection('scenes').getFirstListItem(`nom="${nomScene}"`);
+        return await getArtistesBySceneId(scene.id);
+    } catch (e) {
+        console.error("Erreur getArtistesBySceneNom :", e);
         return [];
     }
 }
