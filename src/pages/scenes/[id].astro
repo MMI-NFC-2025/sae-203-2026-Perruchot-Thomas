@@ -35,8 +35,8 @@ const datesFestival = [
       </div>
     </div>
 
-    <div class="col-span-12 lg:col-start-2 lg:col-span-10 flex flex-col gap-4">
-      <h1 class="font-display text-6xl text-beige-100 uppercase tracking-wider">
+    <div class="col-span-12 lg:col-start-2 lg:col-span-10 flex flex-col gap-4 mt-12 lg:mt-0">
+      <h1 class="font-display text-[40px] text-beige-100 uppercase tracking-wider">
         {scene.nom}
       </h1>
       <div class="font-body text-beige-100 text-lg leading-relaxed opacity-90 border-l-2 border-beige-100 pl-6">
@@ -44,48 +44,56 @@ const datesFestival = [
       </div>
     </div>
 
-    <div class="col-span-12 flex flex-wrap justify-center gap-4 md:gap-6 mt-8">
-        {datesFestival.map((date, index) => (
-            <button 
-                data-date-btn={date.iso}
-                class={`date-tab px-8 py-4 rounded-full font-body font-bold uppercase transition-all shadow-lg active:scale-95 text-sm md:text-base border-2
-                ${index === 0 
-                    ? 'bg-beige-100 text-vert-500 border-beige-100' 
-                    : 'bg-beige-100/20 text-beige-100 border-transparent'}`}>
-                {date.label}
-            </button>
-        ))}
+    <div class="col-span-12 mt-12">
+        <h2 class="font-display text-[40px] text-beige-100 uppercase tracking-wider">
+            LISTE DES ARTISTES
+        </h2>
     </div>
 
-    <div class="col-span-12 lg:col-start-3 lg:col-span-8 flex flex-col items-center gap-10">
-        {datesFestival.map((date, index) => {
-            const jourProg = programmation.find(p => p.date.startsWith(date.iso));
-            return (
-                <div 
-                    data-date-content={date.iso}
-                    class={`date-panel w-full flex flex-col items-center gap-12 ${index !== 0 ? 'hidden' : ''}`}
-                >
-                    <div class="w-full bg-vert-300 p-12 rounded-[40px] shadow-2xl">
-                        <div class="flex flex-col items-center gap-6">
-                            {jourProg && jourProg.expand?.artiste ? (
-                                (jourProg.expand.artiste as any[]).map((art) => (
-                                    <h2 class="font-display text-5xl md:text-7xl text-beige-100 uppercase text-center leading-tight">
-                                        {art.nom}
-                                    </h2>
-                                ))
-                            ) : (
-                                <p class="font-body text-beige-100/60 text-2xl uppercase italic">Aucun artiste ce jour</p>
-                            )}
-                        </div>
+    <div class="col-span-12 flex justify-center mt-8">
+        <div class="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-4 md:gap-6 w-full max-w-6xl px-4 md:px-10">
+            {datesFestival.map((date, index) => (
+                <button 
+                    data-date-btn={date.iso}
+                    class={`date-tab px-4 py-4 md:px-8 rounded-full font-body font-bold uppercase transition-all shadow-lg active:scale-95 text-xs md:text-base border-2
+                    ${index === 0 
+                        ? 'bg-beige-100 text-vert-500 border-beige-100' 
+                        : 'bg-beige-100/20 text-beige-100 border-transparent'}`}>
+                    {date.label}
+                </button>
+            ))}
+        </div>
+    </div>
+
+<div class="col-span-12 lg:col-start-3 lg:col-span-8 flex flex-col items-center gap-10">
+    {datesFestival.map((date, index) => {
+        const jourProg = programmation.find(p => p.date.startsWith(date.iso));
+        return (
+            <div 
+                data-date-content={date.iso}
+                class={`date-panel w-full flex flex-col items-center ${index !== 0 ? 'hidden' : ''}`}
+            >
+                <div class="w-full bg-vert-300 p-12 rounded-[40px] shadow-2xl mt-12 md:mt-0">
+                    <div class="flex flex-col items-center gap-6">
+                        {jourProg && jourProg.expand?.artiste ? (
+                            (jourProg.expand.artiste as any[]).map((art) => (
+                                <h2 class="font-display text-5xl md:text-7xl text-beige-100 uppercase text-center leading-tight">
+                                    {art.nom}
+                                </h2>
+                            ))
+                        ) : (
+                            <p class="font-body text-beige-100/60 text-2xl uppercase italic">Aucun artiste ce jour</p>
+                        )}
                     </div>
-
-                    <a href={`/artistes/${date.slug}`} class="bg-beige-100 text-vert-500 font-body font-bold uppercase px-12 py-5 rounded-full shadow-md active:scale-95 transition-all">
-                        Voir tous les artistes
-                    </a>
                 </div>
-            )
-        })}
-    </div>
+
+                <a href={`/artistes/${date.slug}`} class="bg-beige-100 text-vert-500 font-body font-bold uppercase px-12 py-5 rounded-full shadow-md active:scale-95 transition-all mt-16 lg:mt-12">
+                    Voir tous les artistes
+                </a>
+            </div>
+        )
+    })}
+</div>
 
     </main>
 </Layout>
@@ -99,12 +107,10 @@ const datesFestival = [
             const targetDate = btn.getAttribute('data-date-btn');
 
             buttons.forEach(b => {
-                // On retire les styles actifs et on remet les inactifs (sans hover)
                 b.classList.remove('bg-beige-100', 'text-vert-500', 'border-beige-100');
                 b.classList.add('bg-beige-100/20', 'text-beige-100', 'border-transparent');
             });
             
-            // On applique le style actif au bouton cliqué
             btn.classList.add('bg-beige-100', 'text-vert-500', 'border-beige-100');
             btn.classList.remove('bg-beige-100/20', 'text-beige-100', 'border-transparent');
 

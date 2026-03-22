@@ -97,16 +97,16 @@ export async function getArtistesByDate(dateSelectionnee) {
     }
 }
 
-/** Récupère toute la programmation d'une scène spécifique avec les artistes */
-export async function getProgrammationByScene(sceneId) {
+
+export async function getProgrammationByScene(id) {
     try {
-        return await pb.collection('programmation').getFullList({
-            filter: `scene = "${sceneId}"`,
+        const records = await pb.collection('programmation').getFullList({
+            filter: `scene = "${id}"`,
             expand: 'artiste',
-            sort: 'date',
         });
-    } catch (e) {
-        console.error("Erreur getProgrammationByScene :", error);
+        return records;
+    } catch (e) { 
+        console.error('Erreur lors de la récupération de la programmation :', e);
         return [];
     }
 }
