@@ -1,0 +1,177 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Infos Pratiques - ECHO SONORE">
+  <main class="flex flex-col">
+    
+    <section class="bg-beige-100 py-24">
+      <div class="grille">
+        <div class="col-span-12">
+            <h1 class="text-vert-500 font-display text-[40px] uppercase tracking-wider mb-2">
+                Infos Pratiques
+            </h1>
+            <p class="font-body text-vert-500 text-corp-lg italic">
+                Toutes les infos qu'il vous faut pour préparer votre visite se trouvent ici !
+            </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="bg-vert-300 py-20">
+        <div class="grille gap-y-12">
+            
+            <div class="col-span-12 lg:col-span-10">
+                <h2 class="font-display text-[40px] text-vert-500 uppercase mb-8 text-left">TARIFS</h2>
+                <div class="flex flex-col gap-6">
+                    <div class="bg-beige-100 p-8 rounded-[40px] shadow-xl flex justify-between items-center px-12">
+                        <p class="font-display text-[40px] text-vert-500 uppercase text-left">Pass 1 jour</p>
+                        <p class="font-display text-[40px] text-vert-500 text-left">28€</p>
+                    </div>
+                    <div class="bg-beige-100 p-8 rounded-[40px] shadow-xl flex justify-between items-center px-12">
+                        <p class="font-display text-[40px] text-vert-500 uppercase text-left">Pass 2 jours</p>
+                        <p class="font-display text-[40px] text-vert-500 text-left">52€</p>
+                    </div>
+                    <div class="bg-beige-100 p-8 rounded-[40px] shadow-xl flex justify-between items-center px-12">
+                        <p class="font-display text-[40px] text-vert-500 uppercase text-left">Pass 4 jours</p>
+                        <p class="font-display text-[40px] text-vert-500 text-left">98€</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-12 lg:col-span-10 flex">
+                <div class="w-full h-1 bg-vert-500 rounded-full block my-4"></div>
+            </div>
+
+            <div class="col-span-12 lg:col-span-10">
+                <h2 class="font-display text-[40px] text-vert-500 uppercase mb-8 text-left">HÉBERGEMENT</h2>
+                <div class="flex flex-col gap-6 text-left">
+                    <div class="bg-beige-100 p-8 rounded-[40px] shadow-xl flex justify-between items-center px-12 text-left">
+                        <p class="font-display text-[40px] text-vert-500 uppercase text-left">Pass camping</p>
+                        <p class="font-display text-[40px] text-vert-500 text-left">5€</p>
+                    </div>
+                    <div class="bg-beige-100 p-8 rounded-[40px] shadow-xl flex items-center px-12 min-h-[100px] text-left">
+                        <p class="font-display text-[40px] text-vert-500 uppercase text-left">Hôtels partenaires</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-12 lg:col-span-10 flex">
+                <div class="w-full h-1 bg-vert-500 rounded-full block my-4"></div>
+            </div>
+
+            <div class="col-span-12 lg:col-span-10">
+                <h2 class="font-display text-[40px] text-vert-500 uppercase mb-8 text-left">TRANSPORTS</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+                    <div class="bg-beige-100 p-8 rounded-[40px] shadow-xl flex justify-start items-center px-12">
+                        <p class="font-display text-[40px] text-vert-500 uppercase">Navettes</p>
+                    </div>
+                    <div class="bg-beige-100 p-8 rounded-[40px] shadow-xl flex justify-start items-center px-12">
+                        <p class="font-display text-[40px] text-vert-500 uppercase">Trains</p>
+                    </div>
+                    <div class="bg-beige-100 p-8 rounded-[40px] shadow-xl flex justify-start items-center px-12">
+                        <p class="font-display text-[40px] text-vert-500 uppercase">Vélos</p>
+                    </div>
+                    <div class="bg-beige-100 p-8 rounded-[40px] shadow-xl flex justify-start items-center px-12">
+                        <p class="font-display text-[40px] text-vert-500 uppercase">Voitures</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-12 lg:col-span-10 flex">
+                <div class="w-full h-1 bg-vert-500 rounded-full block my-4"></div>
+            </div>
+
+            <div class="col-span-12 lg:col-span-10">
+                <h2 class="font-display text-[40px] text-vert-500 uppercase mb-8 text-left">FAQ</h2>
+                <div class="flex flex-col gap-6">
+                    <div class="faq-card bg-beige-100 rounded-[40px] shadow-xl overflow-hidden cursor-pointer transition-all duration-300 text-left">
+                        <div class="p-8 px-12 flex justify-between items-center">
+                            <p class="font-display text-[40px] text-vert-500 uppercase pr-4 text-left leading-tight">
+                                Quels objets sont interdits ?
+                            </p>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-vert-500 transition-transform duration-300 arrow-icon shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out px-12" style="max-height: 0px;">
+                            <p class="font-body text-vert-500 text-lg pb-8 opacity-80 text-left">Les objets tranchants, bouteilles en verre et substances illicites sont proscrits.</p>
+                        </div>
+                    </div>
+                    <div class="faq-card bg-beige-100 rounded-[40px] shadow-xl overflow-hidden cursor-pointer transition-all duration-300 text-left">
+                        <div class="p-8 px-12 flex justify-between items-center">
+                            <p class="font-display text-[40px] text-vert-500 uppercase pr-4 text-left leading-tight">
+                                Disposez vous d'un vestiaire ?
+                            </p>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-vert-500 transition-transform duration-300 arrow-icon shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out px-12" style="max-height: 0px;">
+                            <p class="font-body text-vert-500 text-lg pb-8 opacity-80 text-left">Oui, un vestiaire surveillé est disponible à l'entrée du festival (2€ par article).</p>
+                        </div>
+                    </div>
+                    <div class="faq-card bg-beige-100 rounded-[40px] shadow-xl overflow-hidden cursor-pointer transition-all duration-300 text-left">
+                        <div class="p-8 px-12 flex justify-between items-center">
+                            <p class="font-display text-[40px] text-vert-500 uppercase pr-4 text-left leading-tight">
+                                Les enfants sont-ils acceptés ?
+                            </p>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-vert-500 transition-transform duration-300 arrow-icon shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out px-12" style="max-height: 0px;">
+                            <p class="font-body text-vert-500 text-lg pb-8 opacity-80 text-left">Oui, le festival est gratuit pour les moins de 12 ans accompagnés d'un adulte.</p>
+                        </div>
+                    </div>
+                    <div class="faq-card bg-beige-100 rounded-[40px] shadow-xl overflow-hidden cursor-pointer transition-all duration-300 text-left">
+                        <div class="p-8 px-12 flex justify-between items-center">
+                            <p class="font-display text-[40px] text-vert-500 uppercase pr-4 text-left leading-tight">
+                                Les animaux sont-ils acceptés ?
+                            </p>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-vert-500 transition-transform duration-300 arrow-icon shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out px-12" style="max-height: 0px;">
+                            <p class="font-body text-vert-500 text-lg pb-8 opacity-80 text-left">Pour des raisons de sécurité et de confort sonore, les animaux ne sont pas admis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+    const faqCards = document.querySelectorAll('.faq-card');
+
+    faqCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const answer = card.querySelector('.faq-answer') as HTMLElement;
+            const arrow = card.querySelector('.arrow-icon') as HTMLElement;
+            
+            if (!answer || !arrow) return;
+
+            faqCards.forEach(other => {
+                if (other !== card) {
+                    const otherAnswer = other.querySelector('.faq-answer') as HTMLElement;
+                    const otherArrow = other.querySelector('.arrow-icon') as HTMLElement;
+                    otherAnswer.style.maxHeight = '0px';
+                    otherArrow.style.transform = 'rotate(0deg)';
+                }
+            });
+
+            const isOpen = answer.style.maxHeight !== '0px' && answer.style.maxHeight !== '';
+
+            if (isOpen) {
+                answer.style.maxHeight = '0px';
+                arrow.style.transform = 'rotate(0deg)';
+            } else {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                arrow.style.transform = 'rotate(180deg)';
+            }
+        });
+    });
+</script>

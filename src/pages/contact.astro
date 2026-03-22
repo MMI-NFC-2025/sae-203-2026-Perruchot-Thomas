@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact - ECHO SONORE">
+  <main class="flex flex-col min-h-screen">
+    
+    <section class="bg-beige-100 py-24 border-b border-vert-500/10">
+      <div class="grille">
+        <div class="col-span-12">
+            <h1 class="text-vert-500 font-display text-[40px] uppercase tracking-wider mb-2">
+                CONTACT
+            </h1>
+            <p class="font-body text-vert-500 text-corp-lg italic">
+                Une question ou une demande particulière ? Notre équipe est là pour vous répondre !
+            </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="flex flex-col lg:flex-row flex-grow">
+        
+        <section class="w-full lg:w-1/2 bg-vert-300 py-20 px-6 md:px-12 lg:px-20">
+            <div class="max-w-xl ml-auto">
+                <form action="#" method="POST" class="flex flex-col gap-10">
+                    <div class="flex flex-col gap-4">
+                        <label for="name" class="font-display text-[40px] text-vert-500 uppercase leading-none">NOM</label>
+                        <input type="text" id="name" name="name" placeholder="Votre nom" class="bg-beige-100 border-none rounded-full p-6 font-body text-vert-500 focus:ring-2 focus:ring-vert-500 outline-none w-full shadow-sm" required />
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                        <label for="email" class="font-display text-[40px] text-vert-500 uppercase leading-none">ADRESSE MAIL</label>
+                        <input type="email" id="email" name="email" placeholder="votre@mail.com" class="bg-beige-100 border-none rounded-full p-6 font-body text-vert-500 focus:ring-2 focus:ring-vert-500 outline-none w-full shadow-sm" required />
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                        <label for="message" class="font-display text-[40px] text-vert-500 uppercase leading-none">MESSAGE</label>
+                        <textarea id="message" name="message" rows="8" placeholder="Votre message..." class="bg-beige-100 border-none rounded-[40px] p-8 font-body text-vert-500 focus:ring-2 focus:ring-vert-500 outline-none resize-none w-full shadow-sm" required></textarea>
+                    </div>
+
+                    <button type="submit" class="bg-vert-500 text-beige-100 font-display text-2xl uppercase py-5 rounded-full shadow-xl hover:bg-vert-600 transition-all active:scale-95 self-start px-16 mt-4">
+                        ENVOYER
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section class="w-full lg:w-1/2 bg-beige-100 py-20 px-6 md:px-12 lg:px-20 border-l border-vert-500/10 flex flex-col">
+            <div class="max-w-xl flex flex-col gap-12 lg:pl-32">
+                
+                <div class="flex flex-col gap-8">
+                    <h2 class="font-display text-[40px] text-vert-500 uppercase leading-tight">INFOS PRATIQUES</h2>
+                    
+                    <div class="flex flex-col gap-6">
+                        <div>
+                            <p class="font-body font-bold text-vert-500 uppercase mb-1">ADRESSE</p>
+                            <p class="font-body text-vert-500 text-lg leading-tight">
+                                Site plein air de AUDINCOURT (25400)<br/>France
+                            </p>
+                        </div>
+
+                        <div>
+                            <p class="font-body font-bold text-vert-500 uppercase mb-1">MAIL</p>
+                            <a href="mailto:contact@echosonore.fr" class="font-body text-vert-500 text-lg hover:underline block">contact@echosonore.fr</a>
+                        </div>
+
+                        <div>
+                            <p class="font-body font-bold text-vert-500 uppercase mb-1">TÉLÉPHONE</p>
+                            <p class="font-body text-vert-500 text-lg">+33 3 89 48 74 55</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-32 h-px bg-vert-500/20"></div>
+
+                <div class="flex flex-col gap-8">
+                    <h2 class="font-display text-[40px] text-vert-500 uppercase leading-tight">RÉSEAUX SOCIAUX</h2>
+                    
+                    <div class="flex flex-wrap gap-10">
+                        <div class="flex flex-col items-center gap-3">
+                            <a href="https://twitter.com" target="_blank" class="hover:scale-110 transition-transform">
+                                <div class="w-16 h-16 bg-vert-500" style="mask: url('/twitter.svg') no-repeat center / contain; -webkit-mask: url('/twitter.svg') no-repeat center / contain;"></div>
+                            </a>
+                            <p class="font-body text-sm text-vert-500 italic">@EchoS Fest</p>
+                        </div>
+
+                        <div class="flex flex-col items-center gap-3">
+                            <a href="https://instagram.com" target="_blank" class="hover:scale-110 transition-transform">
+                                <div class="w-16 h-16 bg-vert-500" style="mask: url('/instagram.svg') no-repeat center / contain; -webkit-mask: url('/instagram.svg') no-repeat center / contain;"></div>
+                            </a>
+                            <p class="font-body text-sm text-vert-500 italic">@EchoSonore.Fest</p>
+                        </div>
+
+                        <div class="flex flex-col items-center gap-3">
+                            <a href="https://facebook.com" target="_blank" class="hover:scale-110 transition-transform">
+                                <div class="w-16 h-16 bg-vert-500" style="mask: url('/facebook.svg') no-repeat center / contain; -webkit-mask: url('/facebook.svg') no-repeat center / contain;"></div>
+                            </a>
+                            <p class="font-body text-sm text-vert-500 italic">@EchoS Fest</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+  </main>
+</Layout>
