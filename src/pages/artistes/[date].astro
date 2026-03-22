@@ -41,11 +41,11 @@ const nav = [
         <div class="col-span-12">
             <h2 class="text-beige-100 font-display text-[32px] uppercase mb-10 text-center">Dates</h2>
             
-            <div class="flex items-center justify-center w-full max-w-6xl mx-auto px-10">
-                <div class="flex flex-wrap justify-center gap-6">
+            <div class="flex items-center justify-center w-full max-w-6xl mx-auto px-4 md:px-10">
+                <div class="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-4 md:gap-6 w-full">
                   {nav.map((item) => (
                     <a href={`/artistes/${item.slug}`} 
-                       class={`px-8 py-4 rounded-full font-body font-bold uppercase transition-all text-center leading-tight min-w-[220px] shadow-lg active:scale-95 text-sm md:text-base border-2
+                       class={`px-4 py-4 md:px-8 rounded-full font-body font-bold uppercase transition-all text-center leading-tight shadow-lg active:scale-95 text-xs md:text-base border-2
                        ${date === item.slug 
                         ? 'bg-beige-100 text-vert-500 border-beige-100' 
                         : 'bg-beige-100/20 text-beige-100 border-transparent hover:bg-beige-100/30'}`}>
@@ -56,7 +56,7 @@ const nav = [
             </div>
         </div>
 
-        <div class="col-span-12 max-w-2xl mx-auto w-full mb-10">
+        <div class="col-span-12 max-w-2xl mx-auto w-full mb-10 mt-20">
             <h2 class="text-beige-100 font-display text-[32px] uppercase mb-6 text-center">Rechercher un artiste</h2>
             <div class="relative px-4">
                 <input 
@@ -92,7 +92,6 @@ const nav = [
 </Layout>
 
 <script>
-  // Script de filtrage Nom et Genre
   const searchInput = document.getElementById('search-input') as HTMLInputElement;
   const cards = document.querySelectorAll('.artiste-card-container');
   const noResultsMessage = document.getElementById('no-results');

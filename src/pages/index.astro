@@ -38,7 +38,7 @@ import Layout from '../layouts/Layout.astro';
             <p class="font-body text-beige-100 text-lg md:text-2xl leading-relaxed max-w-3xl opacity-90">
                 Venez assister à quatre jours de détente au festival ECHO SONORE, le seul festival d’Audincourt regroupant des artistes issus de la culture AFRO !
             </p>
-            <a href="/billetterie" class="bg-beige-100 text-vert-500 font-body font-bold uppercase px-12 py-6 rounded-2xl hover:bg-white transition-all shadow-lg active:scale-95 text-lg">
+            <a href="/billetterie" class="bg-beige-100 text-vert-500 font-body font-bold uppercase px-12 py-6 rounded-full hover:bg-white transition-all shadow-lg active:scale-95 text-lg">
                 ACCÉDER À LA BILLETERIE
             </a>
         </section>
@@ -57,9 +57,12 @@ import Layout from '../layouts/Layout.astro';
             
             <div class="flex flex-col md:flex-row items-center justify-between gap-12">
                 <div class="w-full md:w-[50%] flex flex-col gap-6">
-                    <h2 class="font-display text-5xl md:text-7xl uppercase leading-none">À PROPOS DE NOUS</h2>
+                    <div class="flex items-center gap-2 md:block">
+                        <h2 class="font-display text-5xl md:text-7xl uppercase leading-none">À PROPOS DE NOUS</h2>
+                        <img src="/note.svg" alt="" class="w-24 h-auto md:hidden" />
+                    </div>
                     <p class="font-body text-xl opacity-90">Apprenez en plus sur nous et l’histoire de notre festival de musique afro.</p>
-                    <a href="/a-propos" class="bg-vert-500 text-beige-100 font-body font-bold uppercase px-10 py-4 rounded-2xl self-start hover:bg-vert-300 transition-all shadow-md">
+                    <a href="/a-propos" class="bg-vert-500 text-beige-100 font-body font-bold uppercase px-10 py-4 rounded-full self-start hover:bg-vert-300 transition-all shadow-md">
                         En savoir plus
                     </a>
                 </div>
@@ -72,9 +75,12 @@ import Layout from '../layouts/Layout.astro';
 
             <div class="flex flex-col md:flex-row-reverse items-center justify-between gap-12">
                 <div class="w-full md:w-[50%] flex flex-col gap-6 text-right items-end">
-                    <h2 class="font-display text-5xl md:text-7xl uppercase leading-none">PROGRAMME</h2>
+                    <div class="flex items-center gap-2 md:block">
+                        <img src="/etoiles.svg" alt="" class="w-24 h-auto md:hidden" />
+                        <h2 class="font-display text-5xl md:text-7xl uppercase leading-none">PROGRAMME</h2>
+                    </div>
                     <p class="font-body text-xl opacity-90">Découvrez les activités disponibles lors de notre événement.</p>
-                    <a href="/programme" class="bg-vert-500 text-beige-100 font-body font-bold uppercase px-10 py-4 rounded-2xl self-end hover:bg-vert-300 transition-all shadow-md">
+                    <a href="/programme" class="bg-vert-500 text-beige-100 font-body font-bold uppercase px-10 py-4 rounded-full self-end hover:bg-vert-300 transition-all shadow-md">
                         En savoir plus
                     </a>
                 </div>
@@ -87,9 +93,12 @@ import Layout from '../layouts/Layout.astro';
 
             <div class="flex flex-col md:flex-row items-center justify-between gap-12">
                 <div class="w-full md:w-[50%] flex flex-col gap-6">
-                    <h2 class="font-display text-5xl md:text-7xl uppercase leading-none">ARTISTES</h2>
+                    <div class="flex items-center gap-2 md:block">
+                        <h2 class="font-display text-5xl md:text-7xl uppercase leading-none">ARTISTES</h2>
+                        <img src="/confetis.svg" alt="" class="w-24 h-auto md:hidden" />
+                    </div>
                     <p class="font-body text-xl opacity-90">Rencontrez les artistes présents lors du festival.</p>
-                    <a href="/artistes" class="bg-vert-500 text-beige-100 font-body font-bold uppercase px-10 py-4 rounded-2xl self-start hover:bg-vert-300 transition-all shadow-md">
+                    <a href="/artistes" class="bg-vert-500 text-beige-100 font-body font-bold uppercase px-10 py-4 rounded-full self-start hover:bg-vert-300 transition-all shadow-md">
                         En savoir plus
                     </a>
                 </div>
@@ -102,9 +111,12 @@ import Layout from '../layouts/Layout.astro';
 
             <div class="flex flex-col md:flex-row-reverse items-center justify-between gap-12">
                 <div class="w-full md:w-[50%] flex flex-col gap-6 text-right items-end">
-                    <h2 class="font-display text-5xl md:text-7xl uppercase leading-none">INFOS PRATIQUES</h2>
+                    <div class="flex items-center gap-2 md:block">
+                        <img src="/saxo.svg" alt="" class="w-24 h-auto md:hidden" />
+                        <h2 class="font-display text-5xl md:text-7xl uppercase leading-none">INFOS PRATIQUES</h2>
+                    </div>
                     <p class="font-body text-xl opacity-90">Toutes les informations nécessaires pour votre venue.</p>
-                    <a href="/infos" class="bg-vert-500 text-beige-100 font-body font-bold uppercase px-10 py-4 rounded-2xl self-end hover:bg-vert-300 transition-all shadow-md">
+                    <a href="/infos" class="bg-vert-500 text-beige-100 font-body font-bold uppercase px-10 py-4 rounded-full self-end hover:bg-vert-300 transition-all shadow-md">
                         En savoir plus
                     </a>
                 </div>
@@ -116,7 +128,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
     </section>
 
-<section class="w-full h-[400px] md:h-[600px] overflow-hidden block">
+    <section class="w-full h-[400px] md:h-[600px] overflow-hidden block">
         <img 
             src="/festivalaccueil2img.webp" 
             alt="Ambiance Echo Sonore" 
@@ -124,79 +136,74 @@ import Layout from '../layouts/Layout.astro';
         />
     </section>
 
-<section class="bg-vert-300 py-32 text-vert-500 overflow-x-hidden">
-    <div class="max-w-[1200px] mx-auto px-8 flex flex-col items-center gap-12">
-        
-        <h2 class="font-display text-5xl md:text-7xl uppercase text-center text-vert-500">
-            NOS PARTENAIRES
-        </h2>
-
-        <div class="relative w-full max-w-2xl flex items-center justify-center group">
+    <section class="bg-vert-300 py-32 text-vert-500 overflow-x-hidden">
+        <div class="max-w-[1200px] mx-auto px-8 flex flex-col items-center gap-12">
             
-            <button id="prevBtn" class="absolute -left-4 md:-left-24 z-10 bg-vert-500 p-4 rounded-full hover:scale-110 transition-all shadow-lg flex items-center justify-center">
-                <img src="/arrow-left.svg" alt="Précédent" class="w-6 h-6 md:w-8 md:h-8" />
-            </button>
+            <h2 class="font-display text-5xl md:text-7xl uppercase text-center text-vert-500">
+                NOS PARTENAIRES
+            </h2>
 
-            <div class="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden shadow-2xl bg-white">
-                <div id="carouselTrack" class="flex transition-transform duration-700 ease-in-out h-full w-full">
-                    <img src="/heineken.webp" class="w-full h-full object-contain flex-shrink-0 p-8" alt="Heineken" />
-                    <img src="/starbucks-coffee1.webp" class="w-full h-full object-contain flex-shrink-0 p-10" alt="Starbucks" />
-                    <img src="/spotify-21.webp" class="w-full h-full object-contain flex-shrink-0 p-10" alt="Spotify" />
-                    <img src="/heineken-31.webp" class="w-full h-full object-contain flex-shrink-0 p-8" alt="Heineken 2" />
-                    <img src="/chamas-tacos1.webp" class="w-full h-full object-contain flex-shrink-0 p-6" alt="Chamas Tacos" />
+            <div class="relative w-full max-w-2xl flex items-center justify-center group">
+                
+                <button id="prevBtn" class="absolute left-2 md:-left-24 z-10 bg-vert-500 p-3 md:p-4 rounded-full hover:scale-110 transition-all shadow-lg flex items-center justify-center">
+                    <img src="/arrow-left.svg" alt="Précédent" class="w-5 h-5 md:w-8 md:h-8 object-contain" />
+                </button>
+
+                <div class="relative w-48 h-48 md:w-96 md:h-96 rounded-full overflow-hidden shadow-2xl bg-white transition-all duration-300">
+                    <div id="carouselTrack" class="flex transition-transform duration-700 ease-in-out h-full w-full">
+                        <img src="/heineken.webp" class="w-full h-full object-contain flex-shrink-0 p-8" alt="Heineken" />
+                        <img src="/starbucks-coffee1.webp" class="w-full h-full object-contain flex-shrink-0 p-10" alt="Starbucks" />
+                        <img src="/spotify-21.webp" class="w-full h-full object-contain flex-shrink-0 p-10" alt="Spotify" />
+                        <img src="/heineken-31.webp" class="w-full h-full object-contain flex-shrink-0 p-8" alt="Heineken 2" />
+                        <img src="/chamas-tacos1.webp" class="w-full h-full object-contain flex-shrink-0 p-6" alt="Chamas Tacos" />
+                    </div>
                 </div>
+
+                <button id="nextBtn" class="absolute right-2 md:-right-24 z-10 bg-vert-500 p-3 md:p-4 rounded-full hover:scale-110 transition-all shadow-lg flex items-center justify-center">
+                    <img src="/arrow-right.svg" alt="Suivant" class="w-5 h-5 md:w-8 md:h-8 object-contain" />
+                </button>
             </div>
-
-            <button id="nextBtn" class="absolute -right-4 md:-right-24 z-10 bg-vert-500 p-4 rounded-full hover:scale-110 transition-all shadow-lg flex items-center justify-center">
-                <img src="/arrow-right.svg" alt="Suivant" class="w-6 h-6 md:w-8 md:h-8" />
-            </button>
         </div>
+    </section>
 
-    </div>
-</section>
+    <script>
+        const track = document.getElementById('carouselTrack');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const images = track?.querySelectorAll('img');
+        
+        let index = 0;
+        const totalImages = images?.length || 0;
 
-<script>
-    const track = document.getElementById('carouselTrack');
-    const nextBtn = document.getElementById('nextBtn');
-    const prevBtn = document.getElementById('prevBtn');
-    const images = track?.querySelectorAll('img');
-    
-    let index = 0;
-    const totalImages = images?.length || 0;
-
-    function updateCarousel() {
-        if (track) {
-            track.style.transform = `translateX(-${index * 100}%)`;
+        function updateCarousel() {
+            if (track) {
+                track.style.transform = `translateX(-${index * 100}%)`;
+            }
         }
-    }
 
-    function nextImage() {
-        index = (index + 1) % totalImages;
-        updateCarousel();
-    }
+        function nextImage() {
+            index = (index + 1) % totalImages;
+            updateCarousel();
+        }
 
-    function prevImage() {
-        index = (index - 1 + totalImages) % totalImages;
-        updateCarousel();
-    }
+        function prevImage() {
+            index = (index - 1 + totalImages) % totalImages;
+            updateCarousel();
+        }
 
-    // Défilement automatique toutes les 3 secondes
-    let autoPlay = setInterval(nextImage, 3000);
+        let autoPlay = setInterval(nextImage, 3000);
 
-    // Arrêter l'auto-défilement au clic utilisateur
-    nextBtn?.addEventListener('click', () => {
-        clearInterval(autoPlay);
-        nextImage();
-        autoPlay = setInterval(nextImage, 3000);
-    });
+        nextBtn?.addEventListener('click', () => {
+            clearInterval(autoPlay);
+            nextImage();
+            autoPlay = setInterval(nextImage, 3000);
+        });
 
-    prevBtn?.addEventListener('click', () => {
-        clearInterval(autoPlay);
-        prevImage();
-        autoPlay = setInterval(nextImage, 3000);
-    });
-</script>
-
-
+        prevBtn?.addEventListener('click', () => {
+            clearInterval(autoPlay);
+            prevImage();
+            autoPlay = setInterval(nextImage, 3000);
+        });
+    </script>
   </main>
 </Layout>

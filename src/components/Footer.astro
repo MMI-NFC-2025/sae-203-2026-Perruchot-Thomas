@@ -10,7 +10,7 @@
 
     <div class="flex flex-col md:flex-row justify-between items-start gap-12">
       
-      <div class="flex flex-col gap-10">
+      <div class="flex flex-col gap-10 w-full">
         
         <nav class="flex flex-col gap-2 font-body font-bold text-corp-lg uppercase">
           <a href="/" class="hover:text-jaune-200 transition">Accueil</a>
@@ -23,35 +23,32 @@
         </nav>
 
         <div class="flex gap-6">
-
-  <a href="https://twitter.com" target="_blank" aria-label="Twitter" class="hover:scale-110 transition-transform">
-    <div class="w-10 h-10 bg-beige-100" 
-         style="mask: url('/twitter.svg') no-repeat center / contain; -webkit-mask: url('/twitter.svg') no-repeat center / contain;">
-    </div>
-  </a>
-
-  <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="hover:scale-110 transition-transform">
-    <div class="w-10 h-10 bg-beige-100" 
-         style="mask: url('/instagram.svg') no-repeat center / contain; -webkit-mask: url('/instagram.svg') no-repeat center / contain;">
-    </div>
-  </a>
-
-  <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="hover:scale-110 transition-transform">
-    <div class="w-10 h-10 bg-beige-100" 
-         style="mask: url('/facebook.svg') no-repeat center / contain; -webkit-mask: url('/facebook.svg') no-repeat center / contain;">
-    </div>
-  </a>
-
-</div>
-
-        <div class="flex flex-col gap-1 font-body text-corp-md font-normal opacity-90">
-          <a href="/mentions" class="hover:text-jaune-200">Mentions légales</a>
-          <a href="mailto:contact@echosonore.fr" class="hover:text-jaune-200">contact@echosonore.fr</a>
+          <a href="https://twitter.com" target="_blank" aria-label="Twitter" class="hover:scale-110 transition-transform">
+            <div class="w-10 h-10 bg-beige-100" style="mask: url('/twitter.svg') no-repeat center / contain; -webkit-mask: url('/twitter.svg') no-repeat center / contain;"></div>
+          </a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="hover:scale-110 transition-transform">
+            <div class="w-10 h-10 bg-beige-100" style="mask: url('/instagram.svg') no-repeat center / contain; -webkit-mask: url('/instagram.svg') no-repeat center / contain;"></div>
+          </a>
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="hover:scale-110 transition-transform">
+            <div class="w-10 h-10 bg-beige-100" style="mask: url('/facebook.svg') no-repeat center / contain; -webkit-mask: url('/facebook.svg') no-repeat center / contain;"></div>
+          </a>
         </div>
-      </div>
 
-      <div class="flex flex-col justify-end md:self-end text-left md:text-right">
-        <p class="font-body text-corp-sm font-bold uppercase tracking-widest">© Echo Sonore</p>
+        <div class="flex justify-between items-end w-full">
+          <div class="flex flex-col gap-1 font-body text-corp-md font-normal opacity-90">
+            <a href="/mentions" class="hover:text-jaune-200">Mentions légales</a>
+            <a href="mailto:contact@echosonore.fr" class="hover:text-jaune-200">contact@echosonore.fr</a>
+          </div>
+
+          <div class="hidden md:block opacity-90 whitespace-nowrap">
+            <p class="font-body text-corp-md tracking-widest">© Echo Sonore</p>
+          </div>
+
+          <div class="md:hidden opacity-90">
+            <p class="font-body text-corp-md tracking-widest">© Echo Sonore</p>
+          </div>
+        </div>
+
       </div>
 
     </div>
