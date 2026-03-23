@@ -7,8 +7,7 @@ import Layout from '../layouts/Layout.astro';
     
     <section class="bg-beige-100 py-24 border-b border-vert-500/10">
       <div class="grille">
-        <div class="col-span-12">
-            <h1 class="text-vert-500 font-display text-[40px] uppercase tracking-wider mb-2">
+        <div class="col-span-12 px-6"> <h1 class="text-vert-500 font-display text-[40px] uppercase tracking-wider mb-2">
                 CONTACT
             </h1>
             <p class="font-body text-vert-500 text-corp-lg italic">
@@ -22,7 +21,9 @@ import Layout from '../layouts/Layout.astro';
         
         <section class="w-full lg:w-1/2 bg-vert-300 py-20 px-6 md:px-12 lg:px-20">
             <div class="max-w-xl ml-auto">
-                <form action="#" method="POST" class="flex flex-col gap-10">
+                <div id="response-msg" class="hidden mb-6 p-4 rounded-2xl font-body font-bold text-center italic uppercase"></div>
+
+                <form id="contactForm" class="flex flex-col gap-10">
                     <div class="flex flex-col gap-4">
                         <label for="name" class="font-display text-[40px] text-vert-500 uppercase leading-none">NOM</label>
                         <input type="text" id="name" name="name" placeholder="Votre nom" class="bg-beige-100 border-none rounded-full p-6 font-body text-vert-500 focus:ring-2 focus:ring-vert-500 outline-none w-full shadow-sm" required />
@@ -38,7 +39,7 @@ import Layout from '../layouts/Layout.astro';
                         <textarea id="message" name="message" rows="8" placeholder="Votre message..." class="bg-beige-100 border-none rounded-[40px] p-8 font-body text-vert-500 focus:ring-2 focus:ring-vert-500 outline-none resize-none w-full shadow-sm" required></textarea>
                     </div>
 
-                    <button type="submit" class="bg-vert-500 text-beige-100 font-display text-2xl uppercase py-5 rounded-full shadow-xl hover:bg-vert-600 transition-all active:scale-95 self-start px-16 mt-4">
+                    <button type="submit" id="submitBtn" class="bg-vert-500 text-beige-100 font-display text-2xl uppercase py-5 rounded-full shadow-xl hover:bg-vert-600 transition-all active:scale-95 self-start px-16 mt-4 cursor-pointer">
                         ENVOYER
                     </button>
                 </form>
@@ -104,3 +105,36 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </main>
 </Layout>
+
+<script>
+    import { sendContact } from '../../backend/backend.mjs';
+
+    const contactForm = document.getElementById('contactForm') as HTMLFormElement;
+    const responseMsg = document.getElementById('response-msg');
+    const submitBtn = document.getElementById('submitBtn');
+
+    contactForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (submitBtn) submitBtn.textContent = "ENVOI...";
+
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData);
+
+        const success = await sendContact(data);
+
+        if (responseMsg) {
+            responseMsg.classList.remove('hidden', 'bg-red-500', 'bg-vert-500', 'text-white', 'text-beige-100');
+            if (success) {
+                responseMsg.textContent = "Message envoyé avec succès !";
+                responseMsg.classList.add('bg-vert-500', 'text-beige-100');
+                contactForm.reset();
+            } else {
+                responseMsg.textContent = "Erreur lors de l'envoi.";
+                responseMsg.classList.add('bg-red-500', 'text-white');
+            }
+            responseMsg.classList.remove('hidden');
+        }
+
+        if (submitBtn) submitBtn.textContent = "ENVOYER";
+    });
+</script>

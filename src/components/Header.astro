@@ -9,18 +9,18 @@ import '../styles/global.css';
     ECHO SONORE
   </a>
 
-  <div class="flex-1 flex justify-end">
+  <div class="flex-1 flex justify-end gap-6 items-center">
     <button id="menu-toggle" class="group relative flex flex-col justify-center items-end cursor-pointer focus:outline-none z-[60] h-10 w-10" aria-label="Menu">
-      <span id="line1" class="block w-8 h-[2px] bg-beige-100 rounded-full transition-all duration-300 translate-y-[-8px]"></span>
+      <span id="line1" class="block w-8 h-[2px] bg-beige-100 rounded-full transition-all duration-300 translate-y-[-6px]"></span>
       <span id="line2" class="block w-5 h-[2px] bg-beige-100 rounded-full transition-all duration-300"></span>
-      <span id="line3" class="block w-8 h-[2px] bg-beige-100 rounded-full transition-all duration-300 translate-y-[8px]"></span>
+      <span id="line3" class="block w-8 h-[2px] bg-beige-100 rounded-full transition-all duration-300 translate-y-[6px]"></span>
     </button>
   </div>
 
   <div id="menu-overlay" class="fixed inset-0 h-screen bg-vert-300 -translate-y-full transition-transform duration-500 ease-in-out z-[55] flex flex-col pt-40 pb-20 lg:pb-32 overflow-y-auto">
     <div class="grille h-full flex flex-col">
       
-      <nav class="col-span-12 flex flex-col gap-4 mb-10 items-start">
+      <nav class="col-span-12 flex flex-col gap-4 mb-6 items-start italic">
         <a href="/" class="text-beige-100 font-body font-bold text-3xl md:text-4xl hover:text-vert-500 transition uppercase">Accueil</a>
         <a href="/a-propos" class="text-beige-100 font-body font-bold text-3xl md:text-4xl hover:text-vert-500 transition uppercase">À propos</a>
         <a href="/programme" class="text-beige-100 font-body font-bold text-3xl md:text-4xl hover:text-vert-500 transition uppercase">Programme</a>
@@ -30,24 +30,13 @@ import '../styles/global.css';
         <a href="/contact" class="text-beige-100 font-body font-bold text-3xl md:text-4xl hover:text-vert-500 transition uppercase">Contact</a>
       </nav>
 
-      <div class="col-span-12 h-[2px] bg-beige-100 w-full mb-10"></div>
-
+      <div class="col-span-12 h-[2px] bg-beige-100 w-full mb-10 opacity-30"></div>
+      
       <div class="col-span-12 flex justify-center lg:justify-start gap-10 mb-20 lg:mb-24">
-          <a href="https://twitter.com" class="w-12 h-12 bg-beige-100" style="mask: url('/twitter.svg') no-repeat center / contain; -webkit-mask: url('/twitter.svg') no-repeat center / contain;"></a>
-          <a href="https://instagram.com" class="w-12 h-12 bg-beige-100" style="mask: url('/instagram.svg') no-repeat center / contain; -webkit-mask: url('/instagram.svg') no-repeat center / contain;"></a>
-          <a href="https://facebook.com" class="w-12 h-12 bg-beige-100" style="mask: url('/facebook.svg') no-repeat center / contain; -webkit-mask: url('/facebook.svg') no-repeat center / contain;"></a>
+          <div class="w-12 h-12 bg-beige-100" style="mask: url('/twitter.svg') no-repeat center / contain; -webkit-mask: url('/twitter.svg') no-repeat center / contain;"></div>
+          <div class="w-12 h-12 bg-beige-100" style="mask: url('/instagram.svg') no-repeat center / contain; -webkit-mask: url('/instagram.svg') no-repeat center / contain;"></div>
+          <div class="w-12 h-12 bg-beige-100" style="mask: url('/facebook.svg') no-repeat center / contain; -webkit-mask: url('/facebook.svg') no-repeat center / contain;"></div>
       </div>
-
-      <div class="col-span-12 mt-auto flex justify-between items-end lg:mb-10">
-        <div class="font-body text-corp-md text-beige-100">
-            <p class="hover:underline cursor-pointer">mentions légales</p>
-            <p class="hover:underline cursor-pointer">contact@echosonore.fr</p>
-        </div>
-        <div>
-            <p class="font-body text-corp-md text-beige-100">© Echo Sonore</p>
-        </div>
-      </div>
-
     </div>
   </div>
 </header>
@@ -62,22 +51,40 @@ import '../styles/global.css';
   btn?.addEventListener('click', () => {
     overlay?.classList.toggle('-translate-y-full');
     
-    l1?.classList.toggle('translate-y-[8px]');
+    l1?.classList.toggle('translate-y-[6px]');
     l1?.classList.toggle('rotate-45');
     l1?.classList.toggle('absolute');
     
     l2?.classList.toggle('opacity-0');
     
-    l3?.classList.toggle('translate-y-[-8px]');
+    l3?.classList.toggle('translate-y-[-6px]');
     l3?.classList.toggle('-rotate-45');
     l3?.classList.toggle('absolute');
     
     document.body.classList.toggle('overflow-hidden');
   });
+
+  async function initAuth() {
+    try {
+      const { pb } = await import('../../backend/backend.mjs');
+      const statusLink = document.getElementById('status-link');
+
+      if (pb.authStore.isValid) {
+        if (statusLink) {
+          statusLink.textContent = "Connecté";
+        }
+      }
+    } catch (e) {
+      console.warn("Erreur d'import Backend :", e);
+    }
+  }
+
+  initAuth();
 </script>
 
 <style>
   #line1, #line2, #line3 {
     transform-origin: center;
+    transition: all 0.3s ease-in-out;
   }
 </style>

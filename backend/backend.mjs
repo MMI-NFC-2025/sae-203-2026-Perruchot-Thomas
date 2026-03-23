@@ -1,5 +1,5 @@
 import PocketBase from "pocketbase";
-const pb = new PocketBase('http://127.0.0.1:8090');
+export const pb = new PocketBase('http://127.0.0.1:8090');
 
 
 export async function getAllArtistes() {
@@ -125,5 +125,31 @@ export async function getArtistesBySceneNom(nomScene) {
     } catch (e) {
         console.error("Erreur getArtistesBySceneNom :", e);
         return [];
+    }
+}
+
+
+async function ajouterArtiste(nom, genre) {
+    const data = {
+        "nom": nom,
+        "genre": genre,
+    };
+
+    try {
+        const record = await pb.collection('artiste').create(data);
+        console.log("Artiste créé avec l'ID :", record.id);
+    } catch (error) {
+        console.error("Erreur d'ajout :", error.message);
+    }
+}
+
+
+export async function sendContact(data) {
+    try {
+        await pb.collection('messages').create(data);
+        return true;
+    } catch (e) {
+        console.error("Erreur lors de l'envoi du message :", e);
+        return false;
     }
 }
